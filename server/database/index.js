@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const fetch = require('node-fetch');
 var Schema = mongoose.Schema;
 var prefixes = [
   'Flaming',
@@ -238,27 +239,29 @@ var generateAlbumPic = cb => {
       cb(imagesList);
     });
 };
-
 const Song = mongoose.model('Song', songSchema);
 const Album = mongoose.model('Album', artistSchema);
 const Artist = mongoose.model('Artist', albumSchema);
 
-let newSongs = new Song(vals);
-let newAlbums = new Album(vals);
-let newArtists = new Artist(vals);
+// let newSongs = new Song(vals);
+// let newAlbums = new Album(vals);
+// let newArtists = new Artist(vals);
 
-newSongs.save((err, data) => {
-  if (err) {
-  }
+// newSongs.save((err, data) => {
+//   if (err) {
+//   }
+// });
+// newAlbums.save((err, data) => {
+//   if (err) {
+//   }
+// });
+// newArtists.save((err, data) => {
+//   if (err) {
+//   }
+// });
+// class PopulateArtist {
+//   constructor() {}
+// }
+generateAlbumPic(data => {
+  console.log(data);
 });
-newAlbums.save((err, data) => {
-  if (err) {
-  }
-});
-newArtists.save((err, data) => {
-  if (err) {
-  }
-});
-class PopulateArtist {
-  constructor() {}
-}
