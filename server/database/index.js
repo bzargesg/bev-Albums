@@ -187,6 +187,57 @@ var albumSchema = new Schema({
   collaborators: [],
   albumType: String
 });
+var generateArtistNames = () => {
+  var bandNames = [];
+  for (let i = 0; i < 100; i++) {
+    var randomPre = prefixes[Math.floor(Math.random() * prefixes.length)];
+    var randomSuf = suffixes[Math.floor(Math.random() * suffixes.length)];
+    bandNames.push('The ' + randomPre + ' ' + randomSuf);
+  }
+  return bandNames;
+};
+var generateSongNames = () => {
+  var preAndSuf = prefixes.concat(suffixes);
+  var songNames = [];
+  for (let i = 0; i < 100; i++) {
+    var randFirst = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+    var randSecond = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+    var randThird = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+    songNames.push(`${randFirst} ${randSecond} ${randThird}`);
+  }
+  return songNames;
+};
+var generateBio = () => {
+  var preAndSuf = prefixes.concat(suffixes);
+  var bios = [];
+  for (let i = 0; i < 100; i++) {
+    let randPara = '';
+    for (let j = 0; j < 100; j++) {
+      var randWord = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+      randPara += randWord + ' ';
+    }
+    bios.push(`${randPara}`);
+  }
+  return bios;
+};
+var generateAlbumPic = cb => {
+  let imagesList = [];
+  let promiseArr = [];
+  for (let i = 0; i < 100; i++) {
+    let randomNum = Math.floor(Math.random() * 151);
+    let imgURL = `https://source.unsplash.com/collection/893352/120x120/?sig=${randomNum}`;
+    promiseArr.push(fetch(imgURL));
+  }
+  Promise.all(promiseArr)
+    .then(val => {
+      val.map(element => {
+        imagesList.push(element.url);
+      });
+    })
+    .then(() => {
+      cb(imagesList);
+    });
+};
 
 const Song = mongoose.model('Song', songSchema);
 const Album = mongoose.model('Album', artistSchema);
@@ -208,82 +259,6 @@ newArtists.save((err, data) => {
   if (err) {
   }
 });
-class PopulateArtists {
-  constructor() {
-    this.musicTypes = [
-      'Rock',
-      'Metal',
-      'Country',
-      'Punk',
-      'Pop',
-      'Devil Worshipping',
-      'EDM',
-      'Techno',
-      'Drum and Bass'
-    ];
-    this.names = [];
-    this.artistId = [];
-    this.images = [];
-    this.collaborators = []; //array of arrays
-    this.albumType = [];
-  }
-  generateBio = () => {
-    var preAndSuf = prefixes.concat(suffixes);
-    var bios = [];
-    for (let i = 0; i < 100; i++) {
-      let randPara = '';
-      for (let j = 0; j < 100; j++) {
-        var randWord = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-        randPara += randWord + ' ';
-      }
-      bios.push(`${randPara}`);
-    }
-    return bios;
-  };
-  generateArtistNames = () => {
-    var bandNames = [];
-    for (let i = 0; i < 100; i++) {
-      var randomPre = prefixes[Math.floor(Math.random() * prefixes.length)];
-      var randomSuf = suffixes[Math.floor(Math.random() * suffixes.length)];
-      bandNames.push('The ' + randomPre + ' ' + randomSuf);
-    }
-    return bandNames;
-  };
-}
-
-class PopulateSongs {
+class PopulateArtist {
   constructor() {}
-  generateSongNames = () => {
-    var preAndSuf = prefixes.concat(suffixes);
-    var songNames = [];
-    for (let i = 0; i < 100; i++) {
-      var randFirst = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-      var randSecond = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-      var randThird = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-      songNames.push(`${randFirst} ${randSecond} ${randThird}`);
-    }
-    return songNames;
-  };
-}
-
-class PopulateAlbums {
-  constructor() {}
-  generateAlbumPic = () => {
-    let imagesList = [];
-    let promiseArr = [];
-    for (let i = 0; i < 100; i++) {
-      let randomNum = Math.floor(Math.random() * 151);
-      let imgURL = `https://source.unsplash.com/collection/893352/120x120/?sig=${randomNum}`;
-      promiseArr.push(fetch(imgURL));
-    }
-    Promise.all(promiseArr)
-      .then(val => {
-        val.map(element => {
-          imagesList.push(element.url);
-        });
-      })
-      .then(() => {
-        return imagesList;
-      });
-  };
 }
