@@ -217,6 +217,15 @@ var generateBio = () => {
     bios.push(`${randPara}`);
   }
 };
+var generateAlbumPic = () => {
+  let imgURL = 'https://source.unsplash.com/collection/893352/120x120';
+  let imagesList = [];
+  for (let i = 0; i < 100; i++) {
+    fetch(imgURL).then(response => {
+      imagesList.push(response.url);
+    });
+  }
+};
 
 const Song = mongoose.model('Song', songSchema);
 const Album = mongoose.model('Album', artistSchema);
