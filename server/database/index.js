@@ -199,7 +199,7 @@ class RandomDataGenerator {
       'Funk',
       'Disco'
     ];
-    this.albumVals();
+    this.artistVals();
   }
 
   albumVals() {
@@ -225,10 +225,8 @@ class RandomDataGenerator {
             if (err) {
               console.log('failed to save ', i);
             }
-            console.log('saved ', i);
           });
         }
-        this.artistVals();
       });
   }
   generateArtistNames() {
@@ -300,19 +298,21 @@ class RandomDataGenerator {
   artistVals() {
     //name albums
     var artists = this.generateArtistNames();
-    var albums = [];
     var allArtistAlbums = [];
-    Album.find((err, data) => {
+    var query = Album.find((err, data) => {
+      var albums = [];
       data.map(entry => {
         albums.push(entry._id);
       });
+      return albums;
+    }).then(albums => {
       var artistVal = [];
       for (let i = 0; i < 100; i++) {
         let randomAlbNum = Math.floor(Math.random() * 18) + 2;
         let albumsPerArtist = [];
         for (let j = 0; j < randomAlbNum; j++) {
           let randomAlb = Math.floor(Math.random() * albums.length);
-          albumsPerArtist.push(randomAlb);
+          albumsPerArtist.push(albums[randomAlb]._id);
         }
         allArtistAlbums.push(albumsPerArtist);
       }
@@ -325,10 +325,9 @@ class RandomDataGenerator {
           if (err) {
             console.error('failed to save artist');
           }
-          console.log('Saved artist');
         });
       }
     });
   }
 }
-var stuff = new RandomDataGenerator();
+// var stuff = new RandomDataGenerator();
