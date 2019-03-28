@@ -30,20 +30,53 @@ app.get('/data/albumsbyartist/:artistId', (req, res) => {
 
   // res.end();
 }); //all albums
+var callArtist = (artistName, albumWord = '') => {};
 app.get('/data/albumswithartist/:artistId', (req, res) => {
   //route to db and get album array with 'Includes' by an artist id return empty array if nothing
+  console.log(typeof req.params.artistId);
 
-  res.end();
+  dbquery.getArtistAlbums(
+    req.params.artistId,
+    (err, data) => {
+      if (err) {
+        console.log();
+        res.end();
+      } else {
+        res.json(data);
+      }
+    },
+    'Includes'
+  );
 }); //Includes tag
 app.get('/data/epswithartist/:artistId', (req, res) => {
   //route to db and get album array with 'EP' by an artist id
-
-  res.end();
+  dbquery.getArtistAlbums(
+    req.params.artistId,
+    (err, data) => {
+      if (err) {
+        console.log();
+        res.end();
+      } else {
+        res.json(data);
+      }
+    },
+    'EP'
+  );
 }); //EP tag
 app.get('/data/compilationswithartist/:artistId', (req, res) => {
   //route to db and get album array with 'Compilation' by an artist id
-
-  res.end();
+  dbquery.getArtistAlbums(
+    req.params.artistId,
+    (err, data) => {
+      if (err) {
+        console.log();
+        res.end();
+      } else {
+        res.json(data);
+      }
+    },
+    'Compilation'
+  );
 }); //compilation tag
 
 app.listen(_PORT, err => {
