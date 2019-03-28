@@ -275,12 +275,11 @@ class RandomDataGenerator {
     }
     return bios;
   }
-  generateAlbumPic(cb) {
-    let imagesList = [];
+  generateAlbumPic() {
     let promiseArr = [];
     for (let i = 0; i < 100; i++) {
       let randomNum = Math.floor(Math.random() * 151);
-      let imgURL = `https://source.unsplash.com/collection/893352/120x120/?sig=${randomNum}`;
+      let imgURL = `https://source.unsplash.com/collection/893352/280x280/?sig=${randomNum}`;
       promiseArr.push(fetch(imgURL));
     }
     return promiseArr;
