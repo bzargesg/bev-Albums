@@ -1,6 +1,24 @@
 var mongoose = require('mongoose');
 const fetch = require('node-fetch');
 var Schema = mongoose.Schema;
+mongoose.connect('mongodb://localhost/spoticlone');
+var db = mongoose.connection;
+db.on('error', () => console.error('failed to load DB'));
+db.once('open', () => console.log('db connected'));
+var artistSchema = new Schema({
+  name: String,
+  albums: Array
+});
+
+var albumSchema = new Schema({
+  name: String,
+  image: String,
+  type: String
+});
+
+const Album = mongoose.model('Album', albumSchema);
+const Artist = mongoose.model('Artist', artistSchema);
+
 var prefixes = [
   'Flaming',
   'Black',
@@ -179,16 +197,35 @@ var types = [
   'Funk',
   'Disco'
 ];
-var artistSchema = new Schema({
-  name: String,
-  albums: Array
-});
 
-var albumSchema = new Schema({
-  name: String,
-  image: String,
-  type: String
-});
+var albumVals = () => {
+  //name, image, type
+  var names = generateSongNames();
+  var genres = generateGenreType();
+  var imagesList = [];
+
+  Promise.all(generateAlbumPic())
+    .then(val => {
+      val.map(element => {
+        imagesList.push(element.url);
+      });
+    })
+    .then(() => {
+      for (let i = 0; i < 100; i++) {
+        let newAlbum = new Album({
+          name: names[i],
+          image: imagesList[i],
+          type: genres[i]
+        });
+        newAlbum.save((err, data) => {
+          if (err) {
+            console.log('failed to save ', i);
+          }
+          console.log('saved ', i);
+        });
+      }
+    });
+};
 var generateArtistNames = () => {
   var bandNames = [];
   for (let i = 0; i < 100; i++) {
@@ -238,29 +275,9 @@ var generateAlbumPic = cb => {
     let imgURL = `https://source.unsplash.com/collection/893352/120x120/?sig=${randomNum}`;
     promiseArr.push(fetch(imgURL));
   }
-  Promise.all(promiseArr)
-    .then(val => {
-      val.map(element => {
-        imagesList.push(element.url);
-      });
-    })
-    .then(() => {
-      cb(imagesList);
-    });
+  return promiseArr;
 };
-const Album = mongoose.model('Album', artistSchema);
-const Artist = mongoose.model('Artist', albumSchema);
-
-var albumVals = () => {
-  //name, image, type
-  var names = generateSongNames();
-  var genres = generateGenreType();
-  var albumArt = [];
-  generateAlbumPic(albumPics => {
-    albumArt = albumPics;
-  });
-};
-
+albumVals();
 var artisVals = () => {
   //name albums
 };
