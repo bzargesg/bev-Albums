@@ -165,28 +165,29 @@ var suffixes = [
   'Equinox',
   'Life'
 ];
+var types = [
+  'Rock',
+  'Metal',
+  'Pop',
+  'Rap',
+  'Hip-Hop',
+  'Soul',
+  'Country',
+  'Classical',
+  'Jazz',
+  'Big Band',
+  'Funk',
+  'Disco'
+];
 var artistSchema = new Schema({
-  bio: String,
-  image: String,
-  body: String,
-  appearsOn: [],
-  relatedArtists: [],
-  collabAlbumId: []
-});
-
-var songSchema = new Schema({
   name: String,
-  albumid: String,
-  artistid: String,
-  plays: Number
+  albums: Array
 });
 
 var albumSchema = new Schema({
   name: String,
-  artistid: String,
   image: String,
-  collaborators: [],
-  albumType: String
+  type: String
 });
 var generateArtistNames = () => {
   var bandNames = [];
@@ -196,6 +197,14 @@ var generateArtistNames = () => {
     bandNames.push('The ' + randomPre + ' ' + randomSuf);
   }
   return bandNames;
+};
+var generateGenreType = () => {
+  var genres = [];
+  for (let i = 0; i < 100; i++) {
+    var randomGenre = types[Math.floor(Math.random() * types.length)];
+    genres.push(randomGenre);
+  }
+  return genres;
 };
 var generateSongNames = () => {
   var preAndSuf = prefixes.concat(suffixes);
@@ -239,22 +248,30 @@ var generateAlbumPic = cb => {
       cb(imagesList);
     });
 };
-const Song = mongoose.model('Song', songSchema);
 const Album = mongoose.model('Album', artistSchema);
 const Artist = mongoose.model('Artist', albumSchema);
 
-// let newSongs = new Song(vals);
+var albumVals = () => {
+  //name, image, type
+  var names = generateSongNames();
+  var genres = generateGenreType();
+  var albumArt = [];
+  generateAlbumPic(albumPics => {
+    albumArt = albumPics;
+  });
+};
+
+var artisVals = () => {
+  //name albums
+};
 // let newAlbums = new Album(vals);
 // let newArtists = new Artist(vals);
 
-// newSongs.save((err, data) => {
-//   if (err) {
-//   }
-// });
 // newAlbums.save((err, data) => {
 //   if (err) {
 //   }
 // });
+
 // newArtists.save((err, data) => {
 //   if (err) {
 //   }
@@ -262,6 +279,3 @@ const Artist = mongoose.model('Artist', albumSchema);
 // class PopulateArtist {
 //   constructor() {}
 // }
-generateAlbumPic(data => {
-  console.log(data);
-});
