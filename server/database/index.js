@@ -200,13 +200,12 @@ class RandomDataGenerator {
       'Disco'
     ];
     this.albumVals();
-    this.artistVals();
   }
 
   albumVals() {
     //name, image, type
     var names = this.generateSongNames();
-    var type = this.generateAlbumType();
+    var genres = this.generateAlbumType();
     var imagesList = [];
 
     Promise.all(this.generateAlbumPic())
@@ -229,6 +228,7 @@ class RandomDataGenerator {
             console.log('saved ', i);
           });
         }
+        this.artistVals();
       });
   }
   generateArtistNames() {
@@ -306,29 +306,29 @@ class RandomDataGenerator {
       data.map(entry => {
         albums.push(entry._id);
       });
-    });
-    var artistVal = [];
-    for (let i = 0; i < 100; i++) {
-      let randomAlbNum = Math.floor(Math.random() * 18) + 2;
-      let albumsPerArtist = [];
-      for (let j = 0; j < randomAlbNum; j++) {
-        let randomAlb = Math.floor(Math.random() * albums.length);
-        albumsPerArtist.push(randomAlb);
-      }
-      allArtistAlbums.push(albumsPerArtist);
-    }
-    for (let i = 0; i < 100; i++) {
-      let newArtist = Artist({
-        name: artists[i],
-        albums: allArtistAlbums[i]
-      });
-      newArtist.save((err, data) => {
-        if (err) {
-          console.error('failed to save artist');
+      var artistVal = [];
+      for (let i = 0; i < 100; i++) {
+        let randomAlbNum = Math.floor(Math.random() * 18) + 2;
+        let albumsPerArtist = [];
+        for (let j = 0; j < randomAlbNum; j++) {
+          let randomAlb = Math.floor(Math.random() * albums.length);
+          albumsPerArtist.push(randomAlb);
         }
-        console.log('Saved artist');
-      });
-    }
+        allArtistAlbums.push(albumsPerArtist);
+      }
+      for (let i = 0; i < 100; i++) {
+        let newArtist = Artist({
+          name: artists[i],
+          albums: allArtistAlbums[i]
+        });
+        newArtist.save((err, data) => {
+          if (err) {
+            console.error('failed to save artist');
+          }
+          console.log('Saved artist');
+        });
+      }
+    });
   }
 }
 var stuff = new RandomDataGenerator();
