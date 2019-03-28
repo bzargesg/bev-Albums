@@ -1,4 +1,5 @@
 const express = require('express');
+const { Album, Artist, db, dbquery } = require('./database/index.js');
 const app = express();
 app.use(express.json());
 const _PORT = 3242;
@@ -14,20 +15,34 @@ const _PORT = 3242;
 //albumtypes: Compilation, EP Album Includes
 // app.get('/data/artist', (req, res) => {}); //all info
 // app.get('/data/songsbyartist', (req, res) => {}); //dont do
-app.get('/data/albumsbyartist/', (req, res) => {
+app.get('/data/albumsbyartist/:artistId', (req, res) => {
   // route to db and get album array by an artist id albums with Album tag
-  res.end();
+  console.log(typeof req.params.artistId);
+
+  dbquery.getArtistAlbums(req.params.artistId, (err, data) => {
+    if (err) {
+      console.log();
+      res.end();
+    } else {
+      res.json(data);
+    }
+  });
+
+  // res.end();
 }); //all albums
-app.get('/data/albumswithartist/', (req, res) => {
+app.get('/data/albumswithartist/:artistId', (req, res) => {
   //route to db and get album array with 'Includes' by an artist id return empty array if nothing
+
   res.end();
 }); //Includes tag
-app.get('/data/epswithartist/', (req, res) => {
+app.get('/data/epswithartist/:artistId', (req, res) => {
   //route to db and get album array with 'EP' by an artist id
+
   res.end();
 }); //EP tag
-app.get('/data/compilationswithartist/', (req, res) => {
+app.get('/data/compilationswithartist/:artistId', (req, res) => {
   //route to db and get album array with 'Compilation' by an artist id
+
   res.end();
 }); //compilation tag
 

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-const { Album, Artist, db } = require('./index.js');
+const { Album, Artist, db, dbquery } = require('./index.js');
 const fetch = require('node-fetch');
 class RandomDataGenerator {
   constructor() {
