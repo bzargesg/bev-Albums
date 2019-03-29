@@ -29,12 +29,12 @@ class DatabaseQueryHandler {
     });
   }
 
-  getArtistAlbums(artistName, cb, albumWord = null) {
+  static getArtistAlbums(artistName, cb, albumWord = null) {
     let artistData = [];
     let artistAlbums = [];
     const getByIDs = [];
 
-    this.getAllArtistData(artistName, (err, data) => {
+    DatabaseQueryHandler.getAllArtistData(artistName, (err, data) => {
       if (err) {
         console.log('failed to get album');
       } else {
@@ -62,7 +62,7 @@ class DatabaseQueryHandler {
     });
   }
 }
-const dbquery = new DatabaseQueryHandler();
+// const dbquery = new DatabaseQueryHandler();
 // // dbquery.getAllArtistData('The Screeching Zombies', (stuff, data) =>
 // //   console.log(data)
 // // );
@@ -74,5 +74,5 @@ module.exports = {
   Album,
   Artist,
   db,
-  dbquery,
+  DatabaseQueryHandler,
 };
