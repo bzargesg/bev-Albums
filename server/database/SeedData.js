@@ -194,6 +194,7 @@ class RandomDataGenerator {
           })
           .then(albumData => {
             this.artistVals(albumData);
+            process.exit(0);
           });
       });
     });
