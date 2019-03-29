@@ -1,6 +1,8 @@
-var mongoose = require('mongoose');
-const { Album, Artist, db, dbquery } = require('./index.js');
+/* eslint-disable no-plusplus */
+// const mongoose = require('mongoose');
 const fetch = require('node-fetch');
+const { Album, Artist, db } = require('./index.js');
+
 class RandomDataGenerator {
   constructor() {
     this.prefixes = [
@@ -77,7 +79,7 @@ class RandomDataGenerator {
       'Selective',
       'Swift',
       'Soaring',
-      'Mighty'
+      'Mighty',
     ];
     this.suffixes = [
       'Flames',
@@ -165,7 +167,7 @@ class RandomDataGenerator {
       'Children',
       'Love',
       'Equinox',
-      'Life'
+      'Life',
     ];
     this.types = [
       'Rock',
@@ -179,142 +181,139 @@ class RandomDataGenerator {
       'Jazz',
       'Big Band',
       'Funk',
-      'Disco'
+      'Disco',
     ];
     // this.artistVals();
     db.dropDatabase().then(() => {
       this.albumVals((err, data) => {
         Promise.all(data)
-          .then(albumData => {
-            var albums = [];
-            albumData.map(element => {
-              albums.push(element._id);
-            });
+          .then((albumData) => {
+            const albums = [];
+            // eslint-disable-next-line no-underscore-dangle
+            albumData.map(element => albums.push(element._id));
             return albums;
           })
-          .then(albumData => {
+          .then((albumData) => {
             this.artistVals(albumData);
             process.exit(0);
           });
       });
     });
   }
+
   albumVals(cb) {
-    //name, image, type
-    var names = this.generateSongNames();
-    var genres = this.generateAlbumType();
-    var imagesList = [];
+    // name, image, type
+    const names = this.generateSongNames();
+    const genres = this.generateAlbumType();
+    const imagesList = [];
     let queries = [];
     Promise.all(this.generateAlbumPic())
-      .then(val => {
-        val.map(element => {
-          imagesList.push(element.url);
-        });
+      .then((val) => {
+        val.map(element => imagesList.push(element.url));
       })
       .then(() => {
-        let albumQueries = [];
+        const albumQueries = [];
         for (let i = 0; i < 100; i++) {
-          let newAlbum = new Album({
+          const newAlbum = new Album({
             name: names[i],
             image: imagesList[i],
-            type: genres[i]
+            type: genres[i],
           });
           albumQueries.push(newAlbum.save());
         }
         return albumQueries;
       })
-      .then(albumQs => {
+      .then((albumQs) => {
         queries = albumQs;
         cb(null, queries);
       })
       .catch('failed to generate albums');
   }
+
   generateArtistNames() {
-    var bandNames = [];
+    const bandNames = [];
     for (let i = 0; i < 100; i++) {
-      var randomPre = this.prefixes[
-        Math.floor(Math.random() * this.prefixes.length)
-      ];
-      var randomSuf = this.suffixes[
-        Math.floor(Math.random() * this.suffixes.length)
-      ];
-      bandNames.push('The ' + randomPre + ' ' + randomSuf);
+      const randomPre = this.prefixes[Math.floor(Math.random() * this.prefixes.length)];
+      const randomSuf = this.suffixes[Math.floor(Math.random() * this.suffixes.length)];
+      bandNames.push(`The ${randomPre} ${randomSuf}`);
     }
     return bandNames;
   }
+
   generateGenreType() {
-    var genres = [];
+    const genres = [];
     for (let i = 0; i < 100; i++) {
-      var randomGenre = this.types[
-        Math.floor(Math.random() * this.types.length)
-      ];
+      const randomGenre = this.types[Math.floor(Math.random() * this.types.length)];
       genres.push(randomGenre);
     }
     return genres;
   }
+
   generateSongNames() {
-    var preAndSuf = this.prefixes.concat(this.suffixes);
-    var songNames = [];
+    const preAndSuf = this.prefixes.concat(this.suffixes);
+    const songNames = [];
     for (let i = 0; i < 100; i++) {
-      var randFirst = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-      var randSecond = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-      var randThird = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+      const randFirst = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+      const randSecond = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+      const randThird = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
       songNames.push(`${randFirst} ${randSecond} ${randThird}`);
     }
     return songNames;
   }
+
   generateBio() {
-    var preAndSuf = this.prefixes.concat(this.suffixes);
-    var bios = [];
+    const preAndSuf = this.prefixes.concat(this.suffixes);
+    const bios = [];
     for (let i = 0; i < 100; i++) {
       let randPara = '';
       for (let j = 0; j < 100; j++) {
-        var randWord = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
-        randPara += randWord + ' ';
+        const randWord = preAndSuf[Math.floor(Math.random() * preAndSuf.length)];
+        randPara += `${randWord} `;
       }
       bios.push(`${randPara}`);
     }
     return bios;
   }
-  generateAlbumPic() {
-    let promiseArr = [];
+
+  static generateAlbumPic() {
+    const promiseArr = [];
     for (let i = 0; i < 100; i++) {
-      let randomNum = Math.floor(Math.random() * 151);
-      let imgURL = `https://source.unsplash.com/collection/893352/280x280/?sig=${randomNum}`;
+      const randomNum = Math.floor(Math.random() * 151);
+      const imgURL = `https://source.unsplash.com/collection/893352/280x280/?sig=${randomNum}`;
       promiseArr.push(fetch(imgURL));
     }
     return promiseArr;
   }
-  generateAlbumType() {
-    var albums = ['Compilation', 'EP', 'Album', 'Includes'];
-    var albumTypes = [];
-    for (var i = 0; i < 100; i++) {
-      let randI = Math.floor(Math.random() * albums.length);
+
+  static generateAlbumType() {
+    const albums = ['Compilation', 'EP', 'Album', 'Includes'];
+    const albumTypes = [];
+    for (let i = 0; i < 100; i++) {
+      const randI = Math.floor(Math.random() * albums.length);
       albumTypes.push(albums[randI]);
     }
     return albumTypes;
   }
-  artistVals(albums) {
-    //name albums
-    var artists = this.generateArtistNames();
-    var allArtistAlbums = [];
 
-    var artistVal = [];
+  artistVals(albums) {
+    // name albums
+    const artists = this.generateArtistNames();
+    const allArtistAlbums = [];
     for (let i = 0; i < 100; i++) {
-      let randomAlbNum = Math.floor(Math.random() * 18) + 2;
-      let albumsPerArtist = [];
+      const randomAlbNum = Math.floor(Math.random() * 18) + 2;
+      const albumsPerArtist = [];
       for (let j = 0; j < randomAlbNum; j++) {
-        let randomAlb = Math.floor(Math.random() * albums.length);
+        const randomAlb = Math.floor(Math.random() * albums.length);
         albumsPerArtist.push(albums[randomAlb]);
       }
       allArtistAlbums.push(albumsPerArtist);
     }
     for (let i = 0; i < 100; i++) {
-      let newArtist = Artist({
+      const newArtist = Artist({
         name: artists[i],
-        albums: allArtistAlbums[i]
+        albums: allArtistAlbums[i],
       });
-      newArtist.save((err, data) => {
+      newArtist.save((err) => {
         if (err) {
           console.error('failed to save artist');
         }
@@ -322,4 +321,4 @@ class RandomDataGenerator {
     }
   }
 }
-var stuff = new RandomDataGenerator();
+const stuff = new RandomDataGenerator();

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Album.scss';
 var album = () => {
   return (
     <span className={props.albumName}>

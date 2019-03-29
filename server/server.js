@@ -1,8 +1,9 @@
 const express = require('express');
-const { Album, Artist, db, dbquery } = require('./database/index.js');
+const { dbquery } = require('./database/index.js');
+
 const app = express();
 app.use(express.json());
-const _PORT = 3242;
+const PORT = 3242;
 
 /* ROUTES:
 /data/artist
@@ -12,27 +13,25 @@ const _PORT = 3242;
 /data/epswithartist
 /data/compilationswithartist
 */
-//albumtypes: Compilation, EP Album Includes
+// albumtypes: Compilation, EP Album Includes
 // app.get('/data/artist', (req, res) => {}); //all info
 // app.get('/data/songsbyartist', (req, res) => {}); //dont do
 app.get('/data/albumsbyartist/:artistId', (req, res) => {
   // route to db and get album array by an artist id albums with Album tag
-  console.log(typeof req.params.artistId);
 
   dbquery.getArtistAlbums(req.params.artistId, (err, data) => {
     if (err) {
-      console.log();
-      res.end();
+      res.end(404);
     } else {
       res.json(data);
     }
   });
 
   // res.end();
-}); //all albums
-var callArtist = (artistName, albumWord = '') => {};
+}); // all albums
+// const callArtist = (artistName, albumWord = '') => {};
 app.get('/data/albumswithartist/:artistId', (req, res) => {
-  //route to db and get album array with 'Includes' by an artist id return empty array if nothing
+  // route to db and get album array with 'Includes' by an artist id return empty array if nothing
   console.log(typeof req.params.artistId);
 
   dbquery.getArtistAlbums(
@@ -45,11 +44,11 @@ app.get('/data/albumswithartist/:artistId', (req, res) => {
         res.json(data);
       }
     },
-    'Includes'
+    'Includes',
   );
-}); //Includes tag
+}); // Includes tag
 app.get('/data/epswithartist/:artistId', (req, res) => {
-  //route to db and get album array with 'EP' by an artist id
+  // route to db and get album array with 'EP' by an artist id
   dbquery.getArtistAlbums(
     req.params.artistId,
     (err, data) => {
@@ -60,11 +59,11 @@ app.get('/data/epswithartist/:artistId', (req, res) => {
         res.json(data);
       }
     },
-    'EP'
+    'EP',
   );
-}); //EP tag
+}); // EP tag
 app.get('/data/compilationswithartist/:artistId', (req, res) => {
-  //route to db and get album array with 'Compilation' by an artist id
+  // route to db and get album array with 'Compilation' by an artist id
   dbquery.getArtistAlbums(
     req.params.artistId,
     (err, data) => {
@@ -75,14 +74,14 @@ app.get('/data/compilationswithartist/:artistId', (req, res) => {
         res.json(data);
       }
     },
-    'Compilation'
+    'Compilation',
   );
-}); //compilation tag
+}); // compilation tag
 
-app.listen(_PORT, err => {
+app.listen(PORT, (err) => {
   if (err) {
     console.error('failed to open server');
   } else {
-    console.log(`Listening on ${_PORT}`);
+    console.log(`Listening on ${PORT}`);
   }
 });
