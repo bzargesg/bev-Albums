@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 const fetch = require('node-fetch');
 const { Album, Artist, db } = require('./index.js');
 
@@ -183,6 +183,8 @@ class RandomDataGenerator {
       'Funk',
       'Disco',
     ];
+    this.names = this.generateSongNames();
+    this.genres = RandomDataGenerator.generateAlbumType();
     // this.artistVals();
     db.dropDatabase().then(() => {
       this.albumVals((err, data) => {
@@ -193,9 +195,11 @@ class RandomDataGenerator {
             albumData.map(element => albums.push(element._id));
             return albums;
           })
-          .then((albumData) => {
-            this.artistVals(albumData);
-            process.exit(0);
+          .then(albumStuff => this.artistVals(albumStuff))
+          .then((promisearr) => {
+            Promise.all(promisearr).then(() => {
+              process.exit(0);
+            });
           });
       });
     });
@@ -203,11 +207,11 @@ class RandomDataGenerator {
 
   albumVals(cb) {
     // name, image, type
-    const names = this.generateSongNames();
-    const genres = this.generateAlbumType();
+    const { names } = this;
+    const { genres } = this;
     const imagesList = [];
     let queries = [];
-    Promise.all(this.generateAlbumPic())
+    Promise.all(RandomDataGenerator.generateAlbumPic())
       .then((val) => {
         val.map(element => imagesList.push(element.url));
       })
@@ -308,17 +312,16 @@ class RandomDataGenerator {
       }
       allArtistAlbums.push(albumsPerArtist);
     }
+    const promiseArr = [];
     for (let i = 0; i < 100; i++) {
       const newArtist = Artist({
         name: artists[i],
         albums: allArtistAlbums[i],
       });
-      newArtist.save((err) => {
-        if (err) {
-          console.error('failed to save artist');
-        }
-      });
+      promiseArr.push(newArtist.save());
     }
+    return promiseArr;
   }
 }
+// eslint-disable-next-line no-unused-vars
 const stuff = new RandomDataGenerator();
