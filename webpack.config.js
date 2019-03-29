@@ -1,13 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
-var SRC_DIR = path.join(__dirname, '/client/components');
-var DIST_DIR = path.join(__dirname, '/public');
+
+const SRC_DIR = path.join(__dirname, '/client/components');
+const DIST_DIR = path.join(__dirname, '/public');
 module.exports = {
-  context: __dirname + '/client',
+  context: `${__dirname}/client`,
   entry: './index.js',
   output: {
     path: DIST_DIR,
-    filename: 'app.js'
+    filename: 'app.js',
   },
   module: {
     loaders: [
@@ -17,9 +18,9 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'env']
-        }
-      }
-    ]
-  }
+          presets: ['react', 'es2016', 'env'],
+        },
+      },
+    ],
+  },
 };
