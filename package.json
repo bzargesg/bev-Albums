@@ -12,7 +12,7 @@
     "server-dev": "nodemon server/server.js",
     "seed-data": "node server/database/SeedData.js",
     "mongod": "mongod --config /usr/local/etc/mongod.conf",
-    "test": "jest",
+    "test": "jest --no-cache",
     "coverage": "jest --coverage --colors"
   },
   "dependencies": {

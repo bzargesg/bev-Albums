@@ -26,10 +26,7 @@ app.get('/data/albumsbyartist/:artistId', (req, res) => {
       res.json(data);
     }
   });
-
-  // res.end();
 }); // all albums
-// const callArtist = (artistName, albumWord = '') => {};
 app.get('/data/albumswithartist/:artistId', (req, res) => {
   // route to db and get album array with 'Includes' by an artist id return empty array if nothing
   console.log(typeof req.params.artistId);
@@ -38,7 +35,6 @@ app.get('/data/albumswithartist/:artistId', (req, res) => {
     req.params.artistId,
     (err, data) => {
       if (err) {
-        console.log();
         res.end();
       } else {
         res.json(data);
@@ -53,7 +49,6 @@ app.get('/data/epswithartist/:artistId', (req, res) => {
     req.params.artistId,
     (err, data) => {
       if (err) {
-        console.log();
         res.end();
       } else {
         res.json(data);
@@ -68,7 +63,6 @@ app.get('/data/compilationswithartist/:artistId', (req, res) => {
     req.params.artistId,
     (err, data) => {
       if (err) {
-        console.log();
         res.end();
       } else {
         res.json(data);
