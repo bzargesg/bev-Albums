@@ -20,6 +20,15 @@ module.exports = {
           presets: ['react', 'es2015', 'env'],
         },
       },
+      {
+        rules: [
+          {
+            test: /\.(s*)css$/,
+            include: SRC_DIR,
+            loader: ['style-loader', 'css-loader', 'sass-loader'],
+          },
+        ],
+      },
     ],
   },
 };

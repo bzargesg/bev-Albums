@@ -1,6 +1,49 @@
 body {
-  display: block;
+  font-family: 'Montserrat', sans-serif;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 10px;
+  display: flex;
+  background-color: #181818;
+}
+h3 {
+  display: block;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.005em;
+  color: #fff;
+  margin: 24px 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.allAlbums {
+}
+.albumContainer {
+  display: block;
+  color: #fff;
+  width: 280px;
+  height: 371px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.artistNameAlbum {
+  color: rgb(170, 170, 170);
+}
+.albumText {
+  text-align: center;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+}
+.albumType {
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
+  flex-flow: row wrap;
+  align-content: space-around;
 }

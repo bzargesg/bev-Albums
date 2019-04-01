@@ -4,7 +4,7 @@ import Album from './Album.jsx';
 class AlbumsList extends React.Component {
   constructor() {
     super();
-    var artistName = 'The Living Ray-Bans';
+    this.artistName = 'The Ascending Critics';
     let options = {
       method: 'GET',
       headers: {
@@ -18,7 +18,7 @@ class AlbumsList extends React.Component {
       appearsOn: [],
     };
     //get albums /data/albumsbyartist/artistname
-    fetch(`http://localhost:3242/data/albumsbyartist/${artistName}`, options)
+    fetch(`http://localhost:3242/data/albumsbyartist/${this.artistName}`, options)
       .then(data => {
         // console.log(data);
         return data.json();
@@ -28,7 +28,7 @@ class AlbumsList extends React.Component {
       })
       .then(
         //get singles and EPs /data/epswithartist/artistname
-        fetch(`http://localhost:3242/data/epswithartist/${artistName}`, options)
+        fetch(`http://localhost:3242/data/epswithartist/${this.artistName}`, options)
           .then(data => {
             // console.log(data);
             return data.json();
@@ -39,7 +39,7 @@ class AlbumsList extends React.Component {
       )
       .then(
         //get compilations /data/compilationswithartist/artistname
-        fetch(`http://localhost:3242/data/compilationswithartist/${artistName}`, options)
+        fetch(`http://localhost:3242/data/compilationswithartist/${this.artistName}`, options)
           .then(data => {
             // console.log(data);
             return data.json();
@@ -50,7 +50,7 @@ class AlbumsList extends React.Component {
       )
       .then(
         //appears on /data/albumswithartist/artistname
-        fetch(`http://localhost:3242/data/albumswithartist/${artistName}`, options)
+        fetch(`http://localhost:3242/data/albumswithartist/${this.artistName}`, options)
           .then(data => {
             // console.log(data);
             return data.json();
@@ -60,13 +60,39 @@ class AlbumsList extends React.Component {
           }),
       );
   }
-
+  //albums
+  //Singles and EPs
+  //compilations
+  //Appears On
+  //<Album picURL={} name={}/>
   render() {
     return (
-      <Album
-        picURL="https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=280&h=280&fit=crop&ixid=eyJhcHBfaWQiOjF9"
-        name="Love Transparent Voices"
-      />
+      <div className="allAlbums">
+        <h3>Albums</h3>
+        <div className="albums albumType">
+          {this.state.albums.map(album => {
+            return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
+          })}
+        </div>
+        <h3>Singles and EPs</h3>
+        <div className="eps albumType">
+          {this.state.eps.map(album => {
+            return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
+          })}
+        </div>
+        <h3>Compilations</h3>
+        <div className="compilations albumType">
+          {this.state.compilations.map(album => {
+            return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
+          })}
+        </div>
+        <h3>Appears On</h3>
+        <div className="appearsOn albumType">
+          {this.state.appearsOn.map(album => {
+            return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
+          })}
+        </div>
+      </div>
     );
   }
 }
