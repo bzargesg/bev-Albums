@@ -56,19 +56,12 @@ class DatabaseQueryHandler {
             filteredAlbums.push(element);
           }
         });
-        console.log('filteredalbums: ', filteredAlbums);
+        // console.log('filteredalbums: ', filteredAlbums);
         cb(null, filteredAlbums);
       });
     });
   }
 }
-// const dbquery = new DatabaseQueryHandler();
-// // dbquery.getAllArtistData('The Screeching Zombies', (stuff, data) =>
-// //   console.log(data)
-// // );
-// dbquery.getArtistAlbums('The Screeching Zombies', (err, data) => {
-//   console.log(data);
-// });
 
 module.exports = {
   Album,

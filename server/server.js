@@ -3,6 +3,7 @@ const { DatabaseQueryHandler } = require('./database/index.js');
 
 const app = express();
 app.use(express.json());
+app.use(express.static(`${__dirname}/../public`));
 const PORT = 3242;
 
 /* ROUTES:
@@ -23,6 +24,7 @@ app.get('/data/albumsbyartist/:artistId', (req, res) => {
     if (err) {
       res.end(404);
     } else {
+      console.log('writing data albumsbyartist: ');
       res.json(data);
     }
   });

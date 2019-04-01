@@ -4,14 +4,61 @@ import Album from './Album.jsx';
 class AlbumsList extends React.Component {
   constructor() {
     super();
+    var artistName = 'The Living Ray-Bans';
+    let options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    this.state = {
+      albums: [],
+      eps: [],
+      compilations: [],
+      appearsOn: [],
+    };
     //get albums /data/albumsbyartist/artistname
-    fetch();
-    //get singles and EPs /data/epswithartist/artistname
-    fetch();
-    //get compilations /data/compilationswithartist/artistname
-    fetch();
-    //appears on /data/albumswithartist/artistname
-    fetcj();
+    fetch(`http://localhost:3242/data/albumsbyartist/${artistName}`, options)
+      .then(data => {
+        // console.log(data);
+        return data.json();
+      })
+      .then(res => {
+        this.setState({ albums: res });
+      })
+      .then(
+        //get singles and EPs /data/epswithartist/artistname
+        fetch(`http://localhost:3242/data/epswithartist/${artistName}`, options)
+          .then(data => {
+            // console.log(data);
+            return data.json();
+          })
+          .then(res => {
+            this.setState({ eps: res });
+          }),
+      )
+      .then(
+        //get compilations /data/compilationswithartist/artistname
+        fetch(`http://localhost:3242/data/compilationswithartist/${artistName}`, options)
+          .then(data => {
+            // console.log(data);
+            return data.json();
+          })
+          .then(res => {
+            this.setState({ compilations: res });
+          }),
+      )
+      .then(
+        //appears on /data/albumswithartist/artistname
+        fetch(`http://localhost:3242/data/albumswithartist/${artistName}`, options)
+          .then(data => {
+            // console.log(data);
+            return data.json();
+          })
+          .then(res => {
+            this.setState({ appearsOn: res });
+          }),
+      );
   }
 
   render() {
