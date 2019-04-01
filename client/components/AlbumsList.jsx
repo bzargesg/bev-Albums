@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Album from './Album.jsx';
+import fetch from "node-fetch";
 class AlbumsList extends React.Component {
   constructor() {
     super();
