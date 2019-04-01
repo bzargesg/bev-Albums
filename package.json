@@ -15,6 +15,15 @@
     "test": "jest --no-cache",
     "coverage": "jest --coverage --colors"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "<rootDir>/client/stylesheets/"
+    },
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/client/src/stylesheets/"
+    ]
+  },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -32,6 +41,8 @@
     "webpack-cli": "^3.3.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
     "babel-jest": "^24.5.0",
     "chai": "^4.2.0",
     "css-loader": "^2.1.1",
@@ -41,10 +52,12 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
     "eslint-plugin-import": "^2.16.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^24.5.0",
     "jest-enzyme": "^7.0.2",
     "mocha": "^6.0.2",
     "nodemon": "^1.18.10",
+    "react-test-renderer": "^16.8.6",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1"
   }
