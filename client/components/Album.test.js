@@ -1,6 +1,6 @@
 const React = require('react');
 const { shallow } = require('enzyme');
-// const Album = require('./Album.jsx');
+const Album = require('./Album.jsx');
 // const setUp = (props = {}) => {
 //   const component = shallow(<Album {...props} />);
 //   return component;

@@ -1,8 +1,18 @@
-import React from 'react';
-import AlbumList from './AlbumsList.jsx';
-import './Album.scss';
+// import './Album.scss';
 
-const Album = () => {
+const React = require('react');
+
+const AlbumList = './AlbumsList.jsx';
+
+const Album = props => {
+  return (
+    <div>
+      <div>
+        <img src={props.picURL} alt="stuff" />
+      </div>
+      <div className={props.name}>{props.name}</div>
+    </div>
+  );
   // return (
   //   <span className={props.albumName}>
   //     <img src={props.albumArt} alt={props.albumName} />
@@ -12,3 +22,4 @@ const Album = () => {
   // );
 };
 export default Album;
+// module.exports = Album;
