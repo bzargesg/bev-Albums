@@ -4,30 +4,23 @@ const path = require('path');
 const SRC_DIR = path.join(__dirname, '/client/components');
 const DIST_DIR = path.join(__dirname, '/public');
 module.exports = {
-  entry: `${SRC_DIR}/AlbumsList.jsx`,
+  entry: `${SRC_DIR}/App.jsx`,
   output: {
     path: DIST_DIR,
     filename: 'app.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
         include: SRC_DIR,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'env'],
-        },
+        loader: 'babel-loader'
       },
       {
-        rules: [
-          {
-            test: /\.(s*)css$/,
-            include: SRC_DIR,
-            loader: ['style-loader', 'css-loader', 'sass-loader'],
-          },
-        ],
+        test: /\.(s*)css$/,
+        include: SRC_DIR,
+        loader: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },

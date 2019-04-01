@@ -65,29 +65,30 @@ class AlbumsList extends React.Component {
   //compilations
   //Appears On
   //<Album picURL={} name={}/>
+  
   render() {
     return (
-      <div className="allAlbums">
+      <div className="allAlbums" data-test="allAlbums">
         <h3>Albums</h3>
-        <div className="albums albumType">
+        <div className="albums albumType" data-test="albumsComponent">
           {this.state.albums.map(album => {
             return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
           })}
         </div>
         <h3>Singles and EPs</h3>
-        <div className="eps albumType">
+        <div className="eps albumType" data-test="epsComponent">
           {this.state.eps.map(album => {
             return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
           })}
         </div>
         <h3>Compilations</h3>
-        <div className="compilations albumType">
+        <div className="compilations albumType" data-test="compilationsComponent">
           {this.state.compilations.map(album => {
             return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
           })}
         </div>
         <h3>Appears On</h3>
-        <div className="appearsOn albumType">
+        <div className="appearsOn albumType" data-test="appearsOnComponent">
           {this.state.appearsOn.map(album => {
             return <Album picURL={album.image} name={album.name} artistName={this.artistName} />;
           })}
@@ -96,5 +97,4 @@ class AlbumsList extends React.Component {
     );
   }
 }
-// export default AlbumsList;
-ReactDOM.render(<AlbumsList />, document.getElementById('app'));
+export default AlbumsList;

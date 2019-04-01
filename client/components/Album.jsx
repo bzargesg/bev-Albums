@@ -3,10 +3,14 @@ const AlbumList = './AlbumsList.jsx';
 import './Album.scss';
 const Album = props => {
   return (
-    <div className="albumContainer">
-      <img src={props.picURL} alt="stuff" />
-      <div className="albumText">{props.name}</div>
-      <div className="albumText artistNameAlbum">{props.artistName}</div>
+    <div className="albumContainer" data-test="containerComponent">
+      <img src={props.picURL} alt="stuff" data-test="picComponent" />
+      <div className="albumText" data-test="albumTextComponent">
+        {props.name}
+      </div>
+      <div className="albumText artistNameAlbum" data-test="artistNameComponent">
+        {props.artistName}
+      </div>
     </div>
   );
 };
