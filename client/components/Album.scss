@@ -46,8 +46,6 @@ img {
     opacity: 1;
   }
 }
-.allAlbums {
-}
 .albumContainer {
   display: block;
   color: #fff;
@@ -76,4 +74,33 @@ img {
   align-content: flex-start;
   flex-flow: row wrap;
   align-content: space-around;
+}
+.menu-list {
+  transition: all 0.2s;
+  position: fixed;
+  z-index: 100;
+  color: #b3b3b3;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  background-color: #282828;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  outline: none;
+}
+.menu-item {
+  width: 100%;
+  padding: 3px 20px;
+  clear: both;
+  line-height: 32px;
+  white-space: nowrap;
+  background: 0 0;
+  border: 0;
+  cursor: default;
+}
+.menu-item:hover {
+  color: white;
+  width: auto;
+  background-color: #333;
 }

@@ -10,13 +10,11 @@ class Menu extends React.Component {
   render() {
     return (
       (this.props.show || null) && (
-        <div className="menu">
-          <ul className="menu-list">
-            <li className="menu-item">Start Radio</li>
-            <li className="menu-item">Save to Your Library</li>
-            <li className="menu-item">Add to Playlist</li>
-            <li className="menu-item">Copy Album Link</li>
-          </ul>
+        <div className="menu-list">
+          <div className="menu-item">Start Radio</div>
+          <div className="menu-item">Save to Your Library</div>
+          <div className="menu-item">Add to Playlist</div>
+          <div className="menu-item">Copy Album Link</div>
         </div>
       )
     );
