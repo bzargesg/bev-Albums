@@ -42,6 +42,7 @@ class AlbumsList extends React.Component {
     fetch(`http://localhost:3242/data/compilationswithartist/${this.artistName}`, options)
       .then(data => {
         // console.log(data);
+        /* istanbul ignore next */
         return data.json();
       })
       .then(res => {
