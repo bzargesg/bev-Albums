@@ -4,7 +4,13 @@ import './Album.scss';
 const Album = props => {
   return (
     <div className="albumContainer" data-test="containerComponent">
-      <img src={props.picURL} alt="stuff" data-test="picComponent" />
+      <div className="picContainer">
+        <img className="albumArt" src={props.picURL} alt="stuff" data-test="picComponent" />
+        <img
+          src="https://i2.wp.com/orangecountybookkeepers.com/wp-content/uploads/2016/02/play-button-overlay.png"
+          className="playbutton"
+        />
+      </div>
       <div className="albumText" data-test="albumTextComponent">
         {props.name}
       </div>
