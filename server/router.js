@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 /* eslint-disable no-console */
-const { DatabaseQueryHandler } = require('./database/index.js');
+const { DatabaseQueryHandler } = require('./database/DatabaseQueryHandler.js');
 
 module.exports = function (app) {
   app.get('/data/albumsbyartist/:artistId', (req, res) => {
