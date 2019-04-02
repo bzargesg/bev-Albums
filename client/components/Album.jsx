@@ -5,23 +5,23 @@ import './Album.scss';
 class Album extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      menuShow: false,
+    };
   }
-  // handleRightClick(e) {
-  //   e.preventDefault();
-  //   console.log('click');
-  //   if (e.nativeEvent.which === 3) {
-  //     console.log('right click');
-  //     Menu();
-  //   }
-  // }
+  handleRightClick(e) {
+    e.preventDefault();
+    this.setState({ menuShow: !this.state.menuShow });
+  }
   render() {
     return (
       <div
         className="albumContainer"
         data-test="containerComponent"
-        // onClick={this.handleRightClick}
+        onContextMenu={this.handleRightClick.bind(this)}
       >
         <div className="picContainer">
+          <Menu show={this.state.menuShow} />
           <img className="albumArt" src={this.props.picURL} alt="stuff" data-test="picComponent" />
           <img
             src="https://i2.wp.com/orangecountybookkeepers.com/wp-content/uploads/2016/02/play-button-overlay.png"
