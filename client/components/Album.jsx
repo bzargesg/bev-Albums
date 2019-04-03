@@ -16,13 +16,13 @@ class Album extends React.Component {
   render() {
     return (
       <div>
-        <Menu show={this.state.menuShow} />
+        <Menu show={this.state.menuShow} data-test="menuComp" />
         <div
           className="albumContainer"
           data-test="containerComponent"
           onContextMenu={this.handleRightClick.bind(this)}
         >
-          <div className="picContainer">
+          <div className="picContainer" data-test="picContainerComp">
             <img
               className="albumArt"
               src={this.props.picURL}
@@ -32,6 +32,7 @@ class Album extends React.Component {
             <img
               src="https://i2.wp.com/orangecountybookkeepers.com/wp-content/uploads/2016/02/play-button-overlay.png"
               className="playbutton"
+              data-test="mouseOverPlay"
             />
           </div>
           <div className="albumText" data-test="albumTextComponent">

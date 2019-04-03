@@ -43,4 +43,27 @@ describe('Album component', () => {
     const wrapper = findByAttr(component, 'artistNameComponent');
     expect(wrapper.length).toBe(1);
   });
+  it('should contain the mouseover element', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'picContainerComp');
+    expect(wrapper.length).toBe(1);
+  });
+  it('should contain watermark element', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'mouseOverPlay');
+    expect(wrapper.length).toBe(1);
+  });
+  it('should contain menu element', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'menuComp');
+    expect(wrapper.length).toBe(1);
+  });
+  it('should show menu on right click', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'containerComponent');
+    wrapper.simulate('contextmenu', {
+      preventDefault: () => {},
+    });
+    expect(component.state().menuShow).toBe(true);
+  });
 });
