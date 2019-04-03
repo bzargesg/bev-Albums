@@ -11,8 +11,17 @@ class Album extends React.Component {
   }
   handleRightClick(e) {
     e.preventDefault();
-    this.setState({ menuShow: !this.state.menuShow });
+    this.setState({ menuShow: !this.state.menuShow }, () => {
+      document.addEventListener('click', this.hideDropdownMenu.bind(this));
+    });
   }
+
+  hideDropdownMenu() {
+    this.setState({ menuShow: false }, () => {
+      document.removeEventListener('click', this.hideDropdownMenu);
+    });
+  }
+
   render() {
     return (
       <div>
