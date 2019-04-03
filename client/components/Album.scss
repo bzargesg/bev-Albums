@@ -77,7 +77,7 @@ img {
 }
 .menu-list {
   transition: all 0.2s;
-  position: fixed;
+  position: relative;
   z-index: 100;
   color: #b3b3b3;
   min-width: 160px;

@@ -1,10 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import AlbumList from './AlbumsList.jsx'
-const findByAttr = (component, attr) => {
-  const wrapper = component.find(`[data-test='${attr}']`);
-  return wrapper;
-};
+import findByAttr from '../../__testAsset__/findByAttr.js'
+
 //data-test allAlbums albumsComponent epsComponent compilationsComponent appearsOnComponent
 describe('AlbumList component', ()=>{
   const setUp = () => {
