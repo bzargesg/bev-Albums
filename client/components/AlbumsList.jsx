@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Album from './Album.jsx';
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 class AlbumsList extends React.Component {
   constructor(props) {
     super(props);
-    this.artistName = 'The Ascending Critics';
+    this.artistName = this.props.artistName ? this.props.artistName : 'The Ascending Critics';
 
     this.state = {
       albums: [],
@@ -59,7 +59,6 @@ class AlbumsList extends React.Component {
     albumListTypes.map(request => {
       fetches.push(this.fetchAlbumType(request));
     });
-
     return fetches;
   }
   mapAlbums(type) {
