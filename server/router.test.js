@@ -1,8 +1,25 @@
 const fetch = require('node-fetch');
-// const router = require('./router.js');
+const express = require('express');
+const router = require('./router.js');
 // const Database = require('./database/DatabaseQueryHandler.js');
+// const { DatabaseQueryHandler } = require('./database/DatabaseQueryHandler.js');
 
-const setUp = routeType => `http://localhost:3242/data/${routeType}/The Squirming Fever`;
+// jest.mock('./database/DatabaseQueryHandler.js');
+
+const app = express();
+app.use(express.json());
+require('./router.js')(app);
+
+const PORT = 3000;
+let listener;
+
+const serverSetUp = () => {
+  listener = app.listen(PORT, (err) => {});
+};
+const serverEnd = () => {
+  listener.close();
+};
+const setUp = routeType => `http://localhost:3000/data/${routeType}/The Squirming Fever`;
 describe('Test routes ', () => {
   const options = {
     method: 'GET',
@@ -10,6 +27,15 @@ describe('Test routes ', () => {
       'Content-Type': 'application/json',
     },
   };
+  beforeEach(() => {
+    // DatabaseQueryHandler.mockImplementation(()=>{
+    //   DatabaseQueryHandler:
+    // });
+    serverSetUp();
+  });
+  afterEach(() => {
+    serverEnd();
+  });
   it('route: albumsbyartist ', () => {
     expect.assertions(1);
     const url = setUp('albumsbyartist');

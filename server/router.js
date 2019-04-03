@@ -9,7 +9,6 @@ module.exports = function (app) {
       if (err) {
         res.end(404);
       } else {
-        console.log('writing data albumsbyartist: ');
         res.json(data);
       }
     });
