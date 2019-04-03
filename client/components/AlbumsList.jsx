@@ -6,96 +6,60 @@ class AlbumsList extends React.Component {
   constructor(props) {
     super(props);
     this.artistName = 'The Ascending Critics';
-   
+
     this.state = {
       albums: [],
       eps: [],
       compilations: [],
       appearsOn: [],
-      ready: false
+      ready: false,
     };
     var fetches = this.fetchPromiseGenerator();
 
-    this.setStateQuery(fetches)
-
-    // //get albums /data/albumsbyartist/artistname
-    // fetch(`http://localhost:3242/data/albumsbyartist/${this.artistName}`, options)
-    //   .then(data => {
-    //     // console.log(data);
-    //     return data.json();
-    //   })
-    //   .then(res => {
-    //     this.setState({ albums: res });
-    //   });
-
-    // //get singles and EPs /data/epswithartist/artistname
-    // fetch(`http://localhost:3242/data/epswithartist/${this.artistName}`, options)
-    //   .then(data => {
-    //     // console.log(data);
-    //     return data.json();
-    //   })
-    //   .then(res => {
-    //     this.setState({ eps: res });
-    //   });
-
-    // //get compilations /data/compilationswithartist/artistname
-    // fetch(`http://localhost:3242/data/compilationswithartist/${this.artistName}`, options)
-    //   .then(data => {
-    //     // console.log(data);
-    //     /* istanbul ignore next */
-    //     return data.json();
-    //   })
-    //   .then(res => {
-    //     this.setState({ compilations: res });
-    //   });
-
-    // //appears on /data/albumswithartist/artistname
-    // fetch(`http://localhost:3242/data/albumswithartist/${this.artistName}`, options)
-    //   .then(data => {
-    //     // console.log(data);
-    //     return data.json();
-    //   })
-    //   .then(res => {
-    //     this.setState({ appearsOn: res });
-    //   });
+    this.setStateQuery(fetches);
   }
-  setStateQuery(fetches){
+  setStateQuery(fetches) {
     Promise.all(fetches)
-    .then(res =>{
-      let resProm = [];
-      res.map(resElement =>{
-        resProm.push(resElement.json());
+      .then(res => {
+        let resProm = [];
+        res.map(resElement => {
+          resProm.push(resElement.json());
+        });
+        return resProm;
       })
-      return resProm;
-    }).then(val =>{
-      Promise.all(val)
-      .then(AlbumsByType =>{
-        this.setState({
-          albums: AlbumsByType[0],
-          eps: AlbumsByType[1],
-          compilations: AlbumsByType[2],
-          appearsOn: AlbumsByType[3],
-          ready: true
-        })
-      })
-    })
+      .then(val => {
+        Promise.all(val).then(AlbumsByType => {
+          this.setState({
+            albums: AlbumsByType[0],
+            eps: AlbumsByType[1],
+            compilations: AlbumsByType[2],
+            appearsOn: AlbumsByType[3],
+            ready: true,
+          });
+        });
+      });
   }
-  fetchAlbumType(type){
+  fetchAlbumType(type) {
     let options = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     };
-    return fetch(`http://localhost:3242/data/${type}/${this.artistName}`, options)
+    return fetch(`http://localhost:3242/data/${type}/${this.artistName}`, options);
   }
-  fetchPromiseGenerator(){
-    var fetches = []
-    var albumListTypes= ['albumsbyartist','epswithartist','compilationswithartist','albumswithartist']
-    albumListTypes.map(request =>{
+  fetchPromiseGenerator() {
+    var fetches = [];
+    var albumListTypes = [
+      'albumsbyartist',
+      'epswithartist',
+      'compilationswithartist',
+      'albumswithartist',
+    ];
+    albumListTypes.map(request => {
       fetches.push(this.fetchAlbumType(request));
     });
-    
+
     return fetches;
   }
   mapAlbums(type) {
@@ -126,7 +90,6 @@ class AlbumsList extends React.Component {
         </div>
       </div>
     );
-
   }
 }
 export default AlbumsList;
