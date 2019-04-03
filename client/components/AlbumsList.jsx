@@ -70,7 +70,6 @@ class AlbumsList extends React.Component {
     }).then(val =>{
       Promise.all(val)
       .then(AlbumsByType =>{
-        // console.log(AlbumsByType)
         this.setState({
           albums: AlbumsByType[0],
           eps: AlbumsByType[1],
@@ -78,7 +77,6 @@ class AlbumsList extends React.Component {
           appearsOn: AlbumsByType[3],
           ready: true
         })
-        console.log(this.state)
       })
     })
   }
@@ -95,7 +93,6 @@ class AlbumsList extends React.Component {
     var fetches = []
     var albumListTypes= ['albumsbyartist','epswithartist','compilationswithartist','albumswithartist']
     albumListTypes.map(request =>{
-      console.log(request)
       fetches.push(this.fetchAlbumType(request));
     });
     
@@ -103,14 +100,12 @@ class AlbumsList extends React.Component {
   }
   mapAlbums(type) {
     let element = [];
-    // console.log(type)
     type.map(album =>
       element.push(<Album picURL={album.image} name={album.name} artistName={this.artistName} />),
     );
     return element;
   }
   render() {
-    if(this.state.ready){
     return (
       <div className="allAlbums" data-test="allAlbums">
         <h3>Albums</h3>
@@ -131,9 +126,7 @@ class AlbumsList extends React.Component {
         </div>
       </div>
     );
-    }else {
-      return (<div></div>)
-    }
+
   }
 }
 export default AlbumsList;
