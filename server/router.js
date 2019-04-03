@@ -5,7 +5,6 @@ const { DatabaseQueryHandler } = require('./database/DatabaseQueryHandler.js');
 module.exports = function (app) {
   app.get('/data/albumsbyartist/:artistId', (req, res) => {
     // route to db and get album array by an artist id albums with Album tag
-
     DatabaseQueryHandler.getArtistAlbums(req.params.artistId, (err, data) => {
       if (err) {
         res.end(404);
@@ -17,8 +16,6 @@ module.exports = function (app) {
   }); // all albums
   app.get('/data/albumswithartist/:artistId', (req, res) => {
     // route to db and get album array with 'Includes' by an artist id return empty array if nothing
-    console.log(typeof req.params.artistId);
-
     DatabaseQueryHandler.getArtistAlbums(
       req.params.artistId,
       (err, data) => {

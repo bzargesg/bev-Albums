@@ -18,28 +18,32 @@ describe('Album component', () => {
     return component;
   };
   //run before every test
-  let component;
-  beforeEach(() => {
-    component = setUp();
-  });
+  let component = setUp();
+  // beforeEach(() => {
+  //   component = setUp();
+  // });
   //search for containercomponent tag
   it('should render container without errors', () => {
     //test with class names
+    expect.assertions(1);
     const wrapper = findByAttr(component, 'containerComponent')
     expect(wrapper.length).toBe(1);
   });
   //search for piccomponent tag
   it('should render picture without errors', () => {
+    expect.assertions(1);
     const wrapper= findByAttr(component, 'picComponent');
     expect(wrapper.length).toBe(1);
   });
    //search for albumTextComponent tag
    it('should render album name without errors', () => {
+    expect.assertions(1);
     const wrapper= findByAttr(component, 'albumTextComponent');
     expect(wrapper.length).toBe(1);
   });
    //search for piccomponent tag
    it('should render artist name without errors', () => {
+    expect.assertions(1);
     const wrapper= findByAttr(component, 'artistNameComponent');
     expect(wrapper.length).toBe(1);
   });
@@ -53,33 +57,38 @@ describe('AlbumList component', ()=>{
     return component;
   };
   //run before every test
-  let component;
+  let component= setUp();
   beforeEach(() => {
     component = setUp();
   });
     //search for allAlbums tag
     it('should render allAlbums without errors', () => {
+      expect.assertions(1);
       //test with class names
       const wrapper = findByAttr(component, 'allAlbums')
       expect(wrapper.length).toBe(1);
     });
     //search for albumsComponent tag
     it('should render albumsComponent without errors', () => {
+      expect.assertions(1);
       const wrapper= findByAttr(component, 'albumsComponent');
       expect(wrapper.length).toBe(1);
     });
      //search for epsComponent tag
      it('should render epsComponent without errors', () => {
+      expect.assertions(1);
       const wrapper= findByAttr(component, 'epsComponent');
       expect(wrapper.length).toBe(1);
     });
      //search for compilationsComponent tag
      it('should render compilationsComponent without errors', () => {
+      expect.assertions(1);
       const wrapper= findByAttr(component, 'compilationsComponent');
       expect(wrapper.length).toBe(1);
     });
     //search for appearsOnComponent tag
     it('should render appearsOnComponent without errors', () => {
+      expect.assertions(1);
       const wrapper= findByAttr(component, 'appearsOnComponent');
       expect(wrapper.length).toBe(1);
     });

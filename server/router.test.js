@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
-const router = require('./router.js');
-const Database = require('./database/DatabaseQueryHandler.js');
+// const router = require('./router.js');
+// const Database = require('./database/DatabaseQueryHandler.js');
 
 const setUp = routeType => `http://localhost:3242/data/${routeType}/The Squirming Fever`;
 describe('Test routes ', () => {
