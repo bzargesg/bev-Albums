@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 const express = require('express');
-const router = require('./router.js');
+const router = require('../server/router.js');
 // const Database = require('./database/DatabaseQueryHandler.js');
 // const { DatabaseQueryHandler } = require('./database/DatabaseQueryHandler.js');
 
@@ -8,7 +8,7 @@ const router = require('./router.js');
 
 const app = express();
 app.use(express.json());
-require('./router.js')(app);
+require('../server/router.js')(app);
 
 const PORT = 3000;
 let listener;

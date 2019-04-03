@@ -13,7 +13,7 @@
     "seed-data": "node server/database/SeedData.js",
     "mongod": "mongod --config /usr/local/etc/mongod.conf",
     "test": "jest --no-cache",
-    "coverage": "jest --coverage --colors"
+    "coverage": "jest --no-cache --coverage --colors"
   },
   "jest": {
     "moduleNameMapper": {

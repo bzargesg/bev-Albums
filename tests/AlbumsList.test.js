@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import AlbumList from './AlbumsList.jsx';
-import findByAttr from '../../__testAsset__/findByAttr.js';
+import AlbumList from '../client/components/AlbumsList.jsx';
+import findByAttr from '../__testAsset__/findByAttr.js';
 import fetch from 'node-fetch';
 jest.mock('node-fetch');
 

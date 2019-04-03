@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Menu from './Menu.jsx';
-import findByAttr from '../../__testAsset__/findByAttr.js';
+import Menu from '../client/components/Menu.jsx';
+import findByAttr from '../__testAsset__/findByAttr.js';
 
 const setUp = (show = true) => {
   const component = shallow(<Menu show={show} />);

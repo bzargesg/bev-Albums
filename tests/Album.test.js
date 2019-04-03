@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Album from './Album.jsx';
-import findByAttr from '../../__testAsset__/findByAttr.js';
+import Album from '../client/components/Album.jsx';
+import findByAttr from '../__testAsset__/findByAttr.js';
 var pic =
   'https://images.unsplash.com/photo-1465634836201-1d5651b9b6d6?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=280&h=280&fit=crop&ixid=eyJhcHBfaWQiOjF9';
 
