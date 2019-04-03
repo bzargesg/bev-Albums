@@ -2,53 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import AlbumList from './AlbumsList.jsx';
 import findByAttr from '../../__testAsset__/findByAttr.js';
-import mockFetch from '../../__mocks__/fetch';
-//data-test allAlbums albumsComponent epsComponent compilationsComponent appearsOnComponent
-// describe('AlbumList component', () => {
-//   const setUp = () => {
-//     const component = shallow(<AlbumList />);
-//     return component;
-//   };
-//   //run before every test
-//   let component = setUp();
-//   // beforeEach(() => {
-//   //   component = setUp();
-//   // });
-//   //search for allAlbums tag
-//   it('should render allAlbums without errors', () => {
-//     expect.assertions(1);
-//     //test with class names
-//     const wrapper = findByAttr(component, 'allAlbums');
-//     expect(wrapper.length).toBe(1);
-//   });
-//   //search for albumsComponent tag
-//   it('should render albumsComponent without errors', () => {
-//     expect.assertions(1);
-//     const wrapper = findByAttr(component, 'albumsComponent');
-//     expect(wrapper.length).toBe(1);
-//   });
-//   //search for epsComponent tag
-//   it('should render epsComponent without errors', () => {
-//     expect.assertions(1);
-//     const wrapper = findByAttr(component, 'epsComponent');
-//     expect(wrapper.length).toBe(1);
-//   });
-//   //search for compilationsComponent tag
-//   it('should render compilationsComponent without errors', () => {
-//     expect.assertions(1);
-//     const wrapper = findByAttr(component, 'compilationsComponent');
-//     expect(wrapper.length).toBe(1);
-//   });
-//   //search for appearsOnComponent tag
-//   it('should render appearsOnComponent without errors', () => {
-//     expect.assertions(1);
-//     const wrapper = findByAttr(component, 'appearsOnComponent');
-//     expect(wrapper.length).toBe(1);
-//   });
-// });
+import fetch from 'node-fetch';
+jest.mock('node-fetch');
 
-describe('stuff', () => {
-  it('fetchstuff', () => {
+describe('MockFetch ', () => {
+  it('test Fetch', () => {
     expect.assertions(1);
     const mockSuccessResponse = {
       _id: '5c9faf730f3ad65bb9d06598',
@@ -60,9 +18,53 @@ describe('stuff', () => {
     };
     const mockJsonPromise = Promise.resolve(mockSuccessResponse);
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
-    // jest.spyOn(AlbumList.prototype, 'fetch').mockImpementation(() => mockFetchPromise);
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+
+    // const newFetch = jest.spyOn(fetch, 'fetch');
+    fetch.mockImplementation(() => mockFetchPromise);
     const wrapper = shallow(<AlbumList />);
-    expect(global.fetch).toHaveBeenCalledTimes(4);
+    expect(fetch).toHaveBeenCalledTimes(4);
+    fetch.mockRestore();
+  });
+});
+describe('AlbumList component', () => {
+  const setUp = () => {
+    const component = shallow(<AlbumList />);
+    return component;
+  };
+  //run before every test
+  let component = setUp();
+  // beforeEach(() => {
+  //   component = setUp();
+  // });
+  //search for allAlbums tag
+  it('should render allAlbums without errors', () => {
+    expect.assertions(1);
+    //test with class names
+    const wrapper = findByAttr(component, 'allAlbums');
+    expect(wrapper.length).toBe(1);
+  });
+  //search for albumsComponent tag
+  it('should render albumsComponent without errors', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'albumsComponent');
+    expect(wrapper.length).toBe(1);
+  });
+  //search for epsComponent tag
+  it('should render epsComponent without errors', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'epsComponent');
+    expect(wrapper.length).toBe(1);
+  });
+  //search for compilationsComponent tag
+  it('should render compilationsComponent without errors', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'compilationsComponent');
+    expect(wrapper.length).toBe(1);
+  });
+  //search for appearsOnComponent tag
+  it('should render appearsOnComponent without errors', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'appearsOnComponent');
+    expect(wrapper.length).toBe(1);
   });
 });

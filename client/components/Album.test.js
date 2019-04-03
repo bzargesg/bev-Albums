@@ -7,7 +7,7 @@ var pic =
 
 //data-test containerComponent picComponent albumTextComponent artistNameComponent
 describe('Album component', () => {
-  const setUp = (props = {}) => {
+  const setUp = () => {
     const component = shallow(
       <Album picURL={pic} name={'Wheeled Bagel Burnt'} artistName={'The Ascending Critics'} />,
     );

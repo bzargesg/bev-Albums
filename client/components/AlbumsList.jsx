@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Album from './Album.jsx';
-// import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 class AlbumsList extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +12,6 @@ class AlbumsList extends React.Component {
       eps: [],
       compilations: [],
       appearsOn: [],
-      ready: false,
     };
     var fetches = this.fetchPromiseGenerator();
 
@@ -22,10 +21,13 @@ class AlbumsList extends React.Component {
     Promise.all(fetches)
       .then(res => {
         let resProm = [];
-        res.map(resElement => {
-          resProm.push(resElement.json());
-        });
-        return resProm;
+        if (res[0] !== undefined) {
+          res.map(resElement => {
+            resProm.push(resElement.json());
+          });
+          return resProm;
+        }
+        return res;
       })
       .then(val => {
         Promise.all(val).then(AlbumsByType => {
@@ -34,7 +36,6 @@ class AlbumsList extends React.Component {
             eps: AlbumsByType[1],
             compilations: AlbumsByType[2],
             appearsOn: AlbumsByType[3],
-            ready: true,
           });
         });
       });
@@ -63,10 +64,12 @@ class AlbumsList extends React.Component {
   }
   mapAlbums(type) {
     let element = [];
-    type.map(album =>
-      element.push(<Album picURL={album.image} name={album.name} artistName={this.artistName} />),
-    );
-    return element;
+    if (type !== undefined && type.length > 0) {
+      type.map(album =>
+        element.push(<Album picURL={album.image} name={album.name} artistName={this.artistName} />),
+      );
+      return element;
+    }
   }
   render() {
     return (
