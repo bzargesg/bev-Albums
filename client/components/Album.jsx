@@ -16,7 +16,7 @@ class Album extends React.Component {
     this.setState(
       { menuShow: !this.state.menuShow, menuLeft: e.pageX, menuTop: e.pageY, clicked: 'album' },
       () => {
-        document.addEventListener('click', this.hideDropdownMenu.bind(this));
+        document.addEventListener('mousedown', this.hideDropdownMenu.bind(this));
       },
     );
   }
@@ -25,12 +25,13 @@ class Album extends React.Component {
     this.setState(
       { menuShow: !this.state.menuShow, menuLeft: e.pageX, menuTop: e.pageY, clicked: '' },
       () => {
-        document.addEventListener('click', this.hideDropdownMenu.bind(this));
+        document.addEventListener('mousedown', this.hideDropdownMenu.bind(this));
       },
     );
   }
 
   hideDropdownMenu() {
+    console.log('click');
     this.setState({ menuShow: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });
