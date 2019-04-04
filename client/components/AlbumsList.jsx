@@ -5,8 +5,8 @@ import fetch from 'node-fetch';
 class AlbumsList extends React.Component {
   constructor(props) {
     super(props);
-    // this.artistName = this.props.artistName ? this.props.artistName : 'The Ascending Critics';
-    this.artistName = 'The Rainbow Equinox';
+    this.artistName = this.props.artistName ? this.props.artistName : 'The Ascending Critics';
+    // this.artistName = 'The Rainbow Equinox';
     this.albumListTypes = [
       'albumsbyartist',
       'epswithartist',
