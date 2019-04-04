@@ -16,7 +16,6 @@ class Menu extends React.Component {
     };
   }
   makeMenu() {
-    console.log(this.props.clicked);
     if (this.props.clicked === 'album') {
       this.albumClick = (
         <div style={this.style} className="menu-list" data-test="menuContainer">
