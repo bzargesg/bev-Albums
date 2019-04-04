@@ -60,10 +60,12 @@ describe('Album component', () => {
   });
   it('should show menu on right click', () => {
     expect.assertions(1);
-    const wrapper = findByAttr(component, 'containerComponent');
+    const wrapper = findByAttr(component, 'picContainerComp');
+    console.log(component.state().menuShow);
     wrapper.simulate('contextmenu', {
       preventDefault: () => {},
     });
+    console.log(component.state().menuShow);
     expect(component.state().menuShow).toBe(true);
   });
 });

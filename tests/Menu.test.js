@@ -4,7 +4,7 @@ import Menu from '../client/components/Menu.jsx';
 import findByAttr from '../__testAsset__/findByAttr.js';
 
 const setUp = (show = true) => {
-  const component = shallow(<Menu show={show} />);
+  const component = shallow(<Menu show={show} clicked="album" />);
   return component;
 };
 describe('Menu Component', () => {

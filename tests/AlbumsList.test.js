@@ -46,25 +46,25 @@ describe('AlbumList component', () => {
   //search for albumsComponent tag
   it('should render albumsComponent without errors', () => {
     expect.assertions(1);
-    const wrapper = findByAttr(component, 'albumsComponent');
+    const wrapper = findByAttr(component, 'albumsbyartist');
     expect(wrapper.length).toBe(1);
   });
   //search for epsComponent tag
   it('should render epsComponent without errors', () => {
     expect.assertions(1);
-    const wrapper = findByAttr(component, 'epsComponent');
+    const wrapper = findByAttr(component, 'epswithartist');
     expect(wrapper.length).toBe(1);
   });
   //search for compilationsComponent tag
   it('should render compilationsComponent without errors', () => {
     expect.assertions(1);
-    const wrapper = findByAttr(component, 'compilationsComponent');
+    const wrapper = findByAttr(component, 'compilationswithartist');
     expect(wrapper.length).toBe(1);
   });
   //search for appearsOnComponent tag
   it('should render appearsOnComponent without errors', () => {
     expect.assertions(1);
-    const wrapper = findByAttr(component, 'appearsOnComponent');
+    const wrapper = findByAttr(component, 'albumswithartist');
     expect(wrapper.length).toBe(1);
   });
 });
