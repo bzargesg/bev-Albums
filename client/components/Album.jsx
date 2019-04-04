@@ -1,7 +1,6 @@
 const React = require('react');
 import Menu from './Menu.jsx';
 import './Album.scss';
-
 class Album extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +23,7 @@ class Album extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="containerAnchor">
         <Menu show={this.state.menuShow} data-test="menuComp" />
         <div
           className="albumContainer"
@@ -39,7 +38,7 @@ class Album extends React.Component {
               data-test="picComponent"
             />
             <img
-              src="https://i2.wp.com/orangecountybookkeepers.com/wp-content/uploads/2016/02/play-button-overlay.png"
+              src="images/play-button-overlay.png"
               className="playbutton"
               data-test="mouseOverPlay"
             />
