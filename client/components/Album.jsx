@@ -8,13 +8,26 @@ class Album extends React.Component {
       menuShow: false,
       menuLeft: 0,
       menuTop: 0,
+      clicked: '',
     };
   }
   handleRightClick(e) {
     e.preventDefault();
-    this.setState({ menuShow: !this.state.menuShow, menuLeft: e.pageX, menuTop: e.pageY }, () => {
-      document.addEventListener('click', this.hideDropdownMenu.bind(this));
-    });
+    this.setState(
+      { menuShow: !this.state.menuShow, menuLeft: e.pageX, menuTop: e.pageY, clicked: 'album' },
+      () => {
+        document.addEventListener('click', this.hideDropdownMenu.bind(this));
+      },
+    );
+  }
+  handleRightClickName(e) {
+    e.preventDefault();
+    this.setState(
+      { menuShow: !this.state.menuShow, menuLeft: e.pageX, menuTop: e.pageY, clicked: '' },
+      () => {
+        document.addEventListener('click', this.hideDropdownMenu.bind(this));
+      },
+    );
   }
 
   hideDropdownMenu() {
@@ -30,14 +43,15 @@ class Album extends React.Component {
           left={this.state.menuLeft}
           top={this.state.menuTop}
           show={this.state.menuShow}
+          clicked={this.state.clicked}
           data-test="menuComp"
         />
-        <div
-          className="albumContainer"
-          data-test="containerComponent"
-          onContextMenu={this.handleRightClick.bind(this)}
-        >
-          <div className="picContainer" data-test="picContainerComp">
+        <div className="albumContainer" data-test="containerComponent">
+          <div
+            className="picContainer"
+            onContextMenu={this.handleRightClick.bind(this)}
+            data-test="picContainerComp"
+          >
             <img
               className="albumArt"
               src={this.props.picURL}
@@ -49,7 +63,11 @@ class Album extends React.Component {
           <div className="albumText" data-test="albumTextComponent">
             {this.props.name}
           </div>
-          <div className="albumText artistNameAlbum" data-test="artistNameComponent">
+          <div
+            className="albumText artistNameAlbum"
+            data-test="artistNameComponent"
+            onContextMenu={this.handleRightClickName.bind(this)}
+          >
             {this.props.artistName}
           </div>
         </div>

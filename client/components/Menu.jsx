@@ -16,22 +16,39 @@ class Menu extends React.Component {
     };
   }
   makeMenu() {
-    this.albumClick = (
-      <div style={this.style} className="menu-list" data-test="menuContainer">
-        <div className="menu-item" data-test="startRadio">
-          Start Radio
+    console.log(this.props.clicked);
+    if (this.props.clicked === 'album') {
+      this.albumClick = (
+        <div style={this.style} className="menu-list" data-test="menuContainer">
+          <div className="menu-item" data-test="startRadio">
+            Start Radio
+          </div>
+          <div className="menu-item" data-test="saveLib">
+            Save to Your Library
+          </div>
+          <div className="menu-item" data-test="addPlayl">
+            Add to Playlist
+          </div>
+          <div className="menu-item" data-test="copyLink">
+            Copy Album Link
+          </div>
         </div>
-        <div className="menu-item" data-test="saveLib">
-          Save to Your Library
+      );
+    } else {
+      this.albumClick = (
+        <div style={this.style} className="menu-list" data-test="menuContainer">
+          <div className="menu-item" data-test="startRadio">
+            Start Radio
+          </div>
+          <div className="menu-item" data-test="saveLib">
+            Save to Your Library
+          </div>
+          <div className="menu-item" data-test="copyArtistLink">
+            Copy Artist Link
+          </div>
         </div>
-        <div className="menu-item" data-test="addPlayl">
-          Add to Playlist
-        </div>
-        <div className="menu-item" data-test="copyLink">
-          Copy Album Link
-        </div>
-      </div>
-    );
+      );
+    }
   }
   render() {
     this.styleConstr();
