@@ -3,11 +3,22 @@ import React from 'react';
 class Menu extends React.Component {
   constructor(props) {
     super(props);
+    this.style = {
+      left: this.props.left + 'px',
+      top: this.props.top + 'px',
+    };
+  }
+  styleConstr() {
+    this.style = {
+      left: this.props.left + 'px',
+      top: this.props.top + 'px',
+    };
   }
   render() {
+    this.styleConstr();
     return (
       (this.props.show || null) && (
-        <div className="menu-list" data-test="menuContainer">
+        <div style={this.style} className="menu-list" data-test="menuContainer">
           <div className="menu-item" data-test="startRadio">
             Start Radio
           </div>

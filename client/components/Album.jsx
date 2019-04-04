@@ -6,11 +6,13 @@ class Album extends React.Component {
     super(props);
     this.state = {
       menuShow: false,
+      menuLeft: 0,
+      menuTop: 0,
     };
   }
   handleRightClick(e) {
     e.preventDefault();
-    this.setState({ menuShow: !this.state.menuShow }, () => {
+    this.setState({ menuShow: !this.state.menuShow, menuLeft: e.pageX, menuTop: e.pageY }, () => {
       document.addEventListener('click', this.hideDropdownMenu.bind(this));
     });
   }
@@ -24,7 +26,12 @@ class Album extends React.Component {
   render() {
     return (
       <div className="containerAnchor">
-        <Menu show={this.state.menuShow} data-test="menuComp" />
+        <Menu
+          left={this.state.menuLeft}
+          top={this.state.menuTop}
+          show={this.state.menuShow}
+          data-test="menuComp"
+        />
         <div
           className="albumContainer"
           data-test="containerComponent"
@@ -37,11 +44,7 @@ class Album extends React.Component {
               alt="stuff"
               data-test="picComponent"
             />
-            <img
-              src="images/play-button-overlay.png"
-              className="playbutton"
-              data-test="mouseOverPlay"
-            />
+            <img src="images/myplay.png" className="playbutton" data-test="mouseOverPlay" />
           </div>
           <div className="albumText" data-test="albumTextComponent">
             {this.props.name}

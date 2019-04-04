@@ -23,8 +23,8 @@ h3 {
 .playbutton {
   object-fit: cover;
   position: absolute;
-  top: 25%;
-  left: 0;
+  top: 33%;
+  left: 33%;
   opacity: 0;
 }
 img {
@@ -42,7 +42,7 @@ img {
     opacity: 0.3;
   }
   .playbutton {
-    opacity: 1;
+    opacity: 0.8;
   }
 }
 .albumContainer {
