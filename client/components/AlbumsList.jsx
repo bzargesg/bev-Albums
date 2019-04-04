@@ -78,6 +78,10 @@ class AlbumsList extends React.Component {
         <div className="albums albumType" data-test="albumsComponent">
           {this.mapAlbums(this.state.albums)}
         </div>
+        <button className="button">
+          Show More
+          <img className="buttonArrow" src="images/downArrow.png" />
+        </button>
         <h3>Singles and EPs</h3>
         <div className="eps albumType" data-test="epsComponent">
           {this.mapAlbums(this.state.eps)}
