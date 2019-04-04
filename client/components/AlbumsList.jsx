@@ -18,21 +18,37 @@ class AlbumsList extends React.Component {
       eps: [],
       compilations: [],
       appearsOn: [],
-      showMoreAlb: false,
-      showMoreEPs: false,
-      showMoreComp: false,
-      showMoreAppears: false,
+      showMoreAlb: true,
+      showMoreEPs: true,
+      showMoreComp: true,
+      showMoreAppears: true,
     };
-    this.showmore = (
-      <button className="button">
-        Show More
-        <img className="buttonArrow" src="images/downArrow.png" />
-      </button>
-    );
+
     var fetches = this.fetchPromiseGenerator();
 
     this.setStateQuery(fetches);
   }
+  showMoreClickHandler(e) {
+    let buttonOrigin = e.target.className.split(' ')[1];
+    if (buttonOrigin === 'albumsbyartist') {
+      this.setState({ showMoreAlb: !this.state.showMoreAlb });
+    } else if (buttonOrigin === 'epswithartist') {
+      this.setState({ showMoreEPs: !this.state.showMoreEPs });
+    } else if (buttonOrigin === 'compilationswithartist') {
+      this.setState({ showMoreComp: !this.state.showMoreComp });
+    } else if (buttonOrigin === 'albumswithartist') {
+      this.setState({ showMoreAppears: !this.state.showMoreAppears });
+    }
+  }
+  showmore(albumType, swap = true) {
+    return (
+      <button className={'button ' + albumType} onClick={this.showMoreClickHandler.bind(this)}>
+        {swap ? 'Show More' : 'Show Less'}
+        <img className="buttonArrow" src={swap ? 'images/downArrow.png' : 'images/upArrow.png'} />
+      </button>
+    );
+  }
+
   setStateQuery(fetches) {
     Promise.all(fetches)
       .then(res => {
@@ -87,27 +103,27 @@ class AlbumsList extends React.Component {
   }
   returnStateType(str) {
     if (str === 'albumsbyartist') {
-      return [this.state.albums, 'Albums'];
+      return [this.state.albums, 'Albums', this.state.showMoreAlb];
     } else if (str === 'epswithartist') {
-      return [this.state.eps, 'Singles and EPs'];
+      return [this.state.eps, 'Singles and EPs', this.state.showMoreEPs];
     } else if (str === 'compilationswithartist') {
-      return [this.state.compilations, 'Compilations'];
+      return [this.state.compilations, 'Compilations', this.state.showMoreComp];
     } else if (str === 'albumswithartist') {
-      return [this.state.appearsOn, 'Appears On'];
+      return [this.state.appearsOn, 'Appears On', this.state.showMoreAppears];
     }
   }
   render() {
     return (
       <div className="allAlbums" data-test="allAlbums">
         {this.albumListTypes.map(albumType => {
-          let [albumVals, headerName] = this.returnStateType(albumType);
+          let [albumVals, headerName, short] = this.returnStateType(albumType);
           return (
             <div>
               <h3>{headerName}</h3>
               <div className={albumType + ' albumType'} data-test={albumType}>
-                {this.mapAlbums(albumVals)}
+                {this.mapAlbums(albumVals, short)}
               </div>
-              {albumVals.length > 10 ? this.showmore : null}
+              {albumVals.length > 10 ? this.showmore(albumType, short) : null}
             </div>
           );
         })}
@@ -116,24 +132,3 @@ class AlbumsList extends React.Component {
   }
 }
 export default AlbumsList;
-{
-  /* <div className="allAlbums" data-test="allAlbums">
-  <h3>Albums</h3>
-  <div className="albums albumType" data-test="albumsComponent">
-    {this.mapAlbums(this.state.albums)}
-  </div>
-  {this.state.albums.length > 10 ? this.showmore : null}
-  <h3>Singles and EPs</h3>
-  <div className="eps albumType" data-test="epsComponent">
-    {this.mapAlbums(this.state.eps)}
-  </div>
-  <h3>Compilations</h3>
-  <div className="compilations albumType" data-test="compilationsComponent">
-    {this.mapAlbums(this.state.compilations)}
-  </div>
-  <h3>Appears On</h3>
-  <div className="appearsOn albumType" data-test="appearsOnComponent">
-    {this.mapAlbums(this.state.appearsOn)}
-  </div>
-</div>; */
-}
