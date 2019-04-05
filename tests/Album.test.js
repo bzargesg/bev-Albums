@@ -58,13 +58,13 @@ describe('Album component', () => {
     const wrapper = findByAttr(component, 'menuComp');
     expect(wrapper.length).toBe(1);
   });
-  it('should show menu on right click', () => {
+  it('should show menu on right click of album', () => {
     expect.assertions(1);
     const wrapper = findByAttr(component, 'picContainerComp');
     wrapper.simulate('contextmenu', {
       preventDefault: () => {},
     });
-    expect(component.state().menuShow).toBe(true);
+    expect(component.state().menuShow && component.state().clicked === 'album').toBe(true);
   });
   it('should hide menu on right click', () => {
     expect.assertions(1);
@@ -76,5 +76,13 @@ describe('Album component', () => {
       preventDefault: () => {},
     });
     expect(component.state().menuShow).toBe(false);
+  });
+  it('should show different menu on artist name click', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'artistNameComponent');
+    wrapper.simulate('contextmenu', {
+      preventDefault: () => {},
+    });
+    expect(component.state().menuShow && component.state().clicked === '').toBe(true);
   });
 });
