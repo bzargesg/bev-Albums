@@ -1,14 +1,15 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import AlbumList from '../client/components/AlbumsList.jsx';
 import findByAttr from '../__testAsset__/findByAttr.js';
 import fetch from 'node-fetch';
+import Album from '../client/components/Album.jsx';
+import 'babel-polyfill';
 jest.mock('node-fetch');
-
-describe('MockFetch ', () => {
-  it('test Fetch', () => {
-    expect.assertions(1);
-    const mockSuccessResponse = {
+describe('AlbumList component', () => {
+  const setUp = (withFetch = false) => {
+    var mockSuccessResponse = [];
+    const testResObj = {
       _id: '5c9faf730f3ad65bb9d06598',
       name: 'Lampshades Wheeled Nerdy',
       image:
@@ -16,19 +17,17 @@ describe('MockFetch ', () => {
       type: 'Compilation',
       __v: 0,
     };
+    for (let i = 0; i < 11; i++) {
+      mockSuccessResponse.push(testResObj);
+    }
+
     const mockJsonPromise = Promise.resolve(mockSuccessResponse);
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
-
-    // const newFetch = jest.spyOn(fetch, 'fetch');
     fetch.mockImplementation(() => mockFetchPromise);
-    const wrapper = shallow(<AlbumList />);
-    expect(fetch).toHaveBeenCalledTimes(4);
-    fetch.mockRestore();
-  });
-});
-describe('AlbumList component', () => {
-  const setUp = () => {
-    const component = shallow(<AlbumList />);
+    const component = mount(<AlbumList />);
+    if (withFetch) {
+      return [component, fetch];
+    }
     return component;
   };
   //run before every test
@@ -36,6 +35,14 @@ describe('AlbumList component', () => {
   // beforeEach(() => {
   //   component = setUp();
   // });
+
+  it('test Fetch', () => {
+    expect.assertions(1);
+    let [component, fetch] = setUp(true);
+    // const wrapper = shallow(<AlbumList />);
+    expect(fetch).toHaveBeenCalledTimes(4);
+    fetch.mockRestore();
+  });
   //search for allAlbums tag
   it('should render allAlbums without errors', () => {
     expect.assertions(1);
@@ -43,6 +50,7 @@ describe('AlbumList component', () => {
     const wrapper = findByAttr(component, 'allAlbums');
     expect(wrapper.length).toBe(1);
   });
+
   //search for albumsComponent tag
   it('should render albumsComponent without errors', () => {
     expect.assertions(1);
@@ -66,5 +74,15 @@ describe('AlbumList component', () => {
     expect.assertions(1);
     const wrapper = findByAttr(component, 'albumswithartist');
     expect(wrapper.length).toBe(1);
+  });
+
+  it('should render button for showmore', async () => {
+    expect.assertions(1);
+    // const component = mount(<AlbumList />);
+
+    component.update();
+    const wrapper = findByAttr(component, 'showMoreButton');
+    // const wrapper = component.find('button');
+    expect(wrapper.length).toBe(4);
   });
 });
