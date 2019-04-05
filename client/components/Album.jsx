@@ -29,9 +29,7 @@ class Album extends React.Component {
       },
     );
   }
-
   hideDropdownMenu() {
-    console.log('click');
     this.setState({ menuShow: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });

@@ -28,6 +28,7 @@ class AlbumsList extends React.Component {
 
     this.setStateQuery(fetches);
   }
+  //need test coverage
   showMoreClickHandler(e) {
     let buttonOrigin = e.target.className.split(' ')[1];
     if (buttonOrigin === 'albumsbyartist') {
@@ -41,8 +42,13 @@ class AlbumsList extends React.Component {
     }
   }
   showmore(albumType, swap = true) {
+    // console.log('button called');
     return (
-      <button className={'button ' + albumType} onClick={this.showMoreClickHandler.bind(this)}>
+      <button
+        data-test="showMoreButton"
+        className={'button ' + albumType}
+        onClick={this.showMoreClickHandler.bind(this)}
+      >
         {swap ? 'Show More' : 'Show Less'}
         <img className="buttonArrow" src={swap ? 'images/downArrow.png' : 'images/upArrow.png'} />
       </button>
