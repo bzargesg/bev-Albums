@@ -23,9 +23,9 @@ class AlbumsList extends React.Component {
       showMoreComp: true,
       showMoreAppears: true,
     };
-
+  }
+  componentDidMount() {
     var fetches = this.fetchPromiseGenerator();
-
     this.setStateQuery(fetches);
   }
   //need test coverage
@@ -42,7 +42,6 @@ class AlbumsList extends React.Component {
     }
   }
   showmore(albumType, swap = true) {
-    // console.log('button called');
     return (
       <button
         data-test="showMoreButton"

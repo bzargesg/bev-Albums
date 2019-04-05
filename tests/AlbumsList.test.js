@@ -7,7 +7,7 @@ import Album from '../client/components/Album.jsx';
 import 'babel-polyfill';
 jest.mock('node-fetch');
 describe('AlbumList component', () => {
-  const setUp = (withFetch = false) => {
+  const setUp = async () => {
     var mockSuccessResponse = [];
     const testResObj = {
       _id: '5c9faf730f3ad65bb9d06598',
@@ -24,24 +24,21 @@ describe('AlbumList component', () => {
     const mockJsonPromise = Promise.resolve(mockSuccessResponse);
     const mockFetchPromise = Promise.resolve({ json: () => mockJsonPromise });
     fetch.mockImplementation(() => mockFetchPromise);
-    const component = mount(<AlbumList />);
-    if (withFetch) {
-      return [component, fetch];
-    }
-    return component;
+    const component = await mount(<AlbumList />);
+    return [component, fetch];
   };
   //run before every test
-  let component = setUp();
-  // beforeEach(() => {
-  //   component = setUp();
-  // });
-
+  let component;
+  let newfetch;
+  beforeEach(async () => {
+    [component, newfetch] = await setUp();
+  });
+  afterEach(() => {
+    newfetch.mockRestore();
+  });
   it('test Fetch', () => {
     expect.assertions(1);
-    let [component, fetch] = setUp(true);
-    // const wrapper = shallow(<AlbumList />);
-    expect(fetch).toHaveBeenCalledTimes(4);
-    fetch.mockRestore();
+    expect(newfetch).toHaveBeenCalledTimes(4);
   });
   //search for allAlbums tag
   it('should render allAlbums without errors', () => {
@@ -78,11 +75,8 @@ describe('AlbumList component', () => {
 
   it('should render button for showmore', async () => {
     expect.assertions(1);
-    // const component = mount(<AlbumList />);
-
     component.update();
     const wrapper = findByAttr(component, 'showMoreButton');
-    // const wrapper = component.find('button');
     expect(wrapper.length).toBe(4);
   });
 });
