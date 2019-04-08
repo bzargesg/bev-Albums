@@ -58,6 +58,12 @@ describe('test DatabaseQueryHandler ', () => {
       'Compilation',
     );
   });
+  it('getArtistAlbums no filter', () => {
+    expect.assertions(1);
+    return DatabaseQueryHandler.getArtistAlbums('guy', (err, data) => {
+      expect(data.length).toBe(1);
+    });
+  });
   it('getArtistAlbums', () => {
     expect.assertions(1);
     return DatabaseQueryHandler.getArtistAlbums(
