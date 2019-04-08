@@ -12,14 +12,87 @@ import findByAttr from '../__testAsset__/findByAttr.js';
 //    Install App
 //    User
 const setup = () => {
-  let component = mount(<Sidebar />);
+  return mount(<Sidebar />);
 };
 describe('Sidebar Tests: ', () => {
   let component;
+  rightClick(component,wrapper){
+    wrapper.simulate('contextmenu', {
+      preventDefault: () =>{},
+    }
+    component.update();
+  }
   beforeEach(() => {
     component = setup();
   });
   describe('Test sidebar options component: ', () => {
-    it('does Logo render ', () => {});
+    it('does Logo render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Logo');
+      expect(wrapper.length).toBe(1);
+    });
+    it('does Home render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Home');
+      expect(wrapper.length).toBe(1);
+    });
+    it('does Search render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Search');
+      expect(wrapper.length).toBe(1);
+    });
+    it('does Your Library render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Your Library');
+      expect(wrapper.length).toBe(1);
+    });
+  });
+  describe('Test Sidebar Recents component: ', () => {
+    it('Does Recent Album render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Recent Album');
+      expect(wrapper.length).toBe(1);
+    });
+    it('Does Recent Playlist render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Recent Playlist');
+      expect(wrapper.length).toBe(1);
+    });
+    it('Does Recent Artist render ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Recent Artist');
+      expect(wrapper.length).toBe(1);
+    });
+    it('does Playlist render rightclick menu ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Recent Playlist');
+      rightClick(component,wrapper);
+      const menuWrapper = findByAttr(component, 'Playlist menu')
+      expect(menuWrapper.length).toBe(1);
+    });
+    it('does Artist render rightclick menu ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Recent Artist');
+      rightClick(component,wrapper);
+      const menuWrapper = findByAttr(component, 'Artist menu')
+      expect(menuWrapper.length).toBe(1);
+    });
+    it('does Album render rightclick menu ', () => {
+      expect.assertions(1);
+      const wrapper = findByAttr(component, 'Recent Album');
+      rightClick(component,wrapper);
+      const menuWrapper = findByAttr(component, 'Album menu')
+      expect(menuWrapper.length).toBe(1);
+    });
+  });
+  it('does Install App render ', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'Install App');
+    expect(wrapper.length).toBe(1);
+  });
+  it('does User render ', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'User');
+    expect(wrapper.length).toBe(1);
   });
 });
