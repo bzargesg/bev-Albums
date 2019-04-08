@@ -26,11 +26,6 @@ describe('Sidebar Tests: ', () => {
     component = setup();
   });
   describe('Test sidebar options component: ', () => {
-    it('does Logo render ', () => {
-      expect.assertions(1);
-      const wrapper = findByAttr(component, 'Logo');
-      expect(wrapper.length).toBe(1);
-    });
     it('does Home render ', () => {
       expect.assertions(1);
       const wrapper = findByAttr(component, 'Home');
@@ -85,6 +80,16 @@ describe('Sidebar Tests: ', () => {
       expect(menuWrapper.length).toBe(1);
     });
   });
+  it('does Sidebar render ', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'Sidebar');
+    expect(wrapper.length).toBe(1);
+  }); 
+  it('does Sidebar header render ', () => {
+    expect.assertions(1);
+    const wrapper = findByAttr(component, 'SidebarHeader');
+    expect(wrapper.length).toBe(1);
+  }); 
   it('does Install App render ', () => {
     expect.assertions(1);
     const wrapper = findByAttr(component, 'Install App');

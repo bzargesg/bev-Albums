@@ -9,13 +9,17 @@ class Sidebar extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="Sidebar" data-test="Sidebar">
+        <h3 className="SidebarHeader" data-test="SidebarHeader">
+          <img className="Logo" alt="Spoopify Logo" src="images/spoop.png" /> Spoopify
+        </h3>
         <SidebarOptions />
-        <span className="RecentlyPlayed">Recently Played</span>
+        <div className="RecentlyPlayed">Recently Played</div>
         <SidebarRecents />
-        <span className="Install">Install App</span>
-        <span className="User">User</span>
+        <div className="Install">Install App</div>
+        <div className="User">User</div>
       </div>
     );
   }
 }
+export default Sidebar;
