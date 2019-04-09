@@ -11,12 +11,15 @@ class Sidebar extends React.Component {
     return (
       <div className="Sidebar" data-test="Sidebar">
         <h3 className="SidebarHeader" data-test="SidebarHeader">
-          <img className="Logo" alt="Spoopify Logo" src="images/spoop.png" /> Spoopify
+          <img className="Logo" alt="Spoopify Logo" src="images/spoop.png" />{' '}
+          <span className="logoTitle">Spoopify</span>
         </h3>
         <SidebarOptions />
         <div className="RecentlyPlayed">Recently Played</div>
         <SidebarRecents />
-        <div className="Install">Install App</div>
+        <div className="Install">
+          <span className="InstallText">Install App</span>
+        </div>
         <div className="User">User</div>
       </div>
     );

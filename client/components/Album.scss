@@ -138,10 +138,56 @@ img {
   font-size: 13px;
 }
 .Sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  position: absolute;
+  padding-left: 24px;
+  width: 230px;
+  height: 90%;
+  top: 0;
+  left: 0;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.015em;
   color: #b3b3b3;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.optionText {
+  margin-left: 10px;
+}
+.logoTitle {
+  padding-bottom: auto;
+  position: absolute;
+  margin-left: 5px;
+}
+.SidebarHeader {
+  font-size: 23px;
+  text-align: left;
+  padding-bottom: 18px;
+}
+.SidebarOptionsContainer {
+  width: 240px;
+  height: 120px;
+}
+.SidebarOptions {
+  height: 40px;
+}
+.RecentlyPlayed {
+  margin-top: 20px;
+}
+.SidebarRecents {
+  height: 435px;
+}
+.Install {
+  height: 40px;
+  width: 206px;
+  border-bottom: 1px solid #404040;
+}
+.user {
+  text-align: left;
+  height: 40px;
+  margin-top: 20px;
 }
 .sidebaroptions:hover {
   color: white;

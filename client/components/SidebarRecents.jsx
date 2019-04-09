@@ -1,6 +1,6 @@
 import React from 'react';
 
 const SidebarRecents = () => {
-  return <div />;
+  return <div className="SidebarRecents" />;
 };
 export default SidebarRecents;
