@@ -159,7 +159,7 @@ img {
 .imgText {
   padding-bottom: auto;
   position: absolute;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 .SidebarHeader {
   font-size: 23px;
@@ -175,6 +175,21 @@ img {
 }
 .RecentlyPlayed {
   margin-top: 20px;
+  margin-bottom: 15px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.recentName {
+  font-size: 14px;
+}
+.recentName:hover {
+  color: white;
+}
+.type {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
 }
 .SidebarRecents {
   height: 435px;
@@ -197,6 +212,9 @@ img {
 }
 .InstallText {
   margin-left: 15px;
+}
+.recentElement {
+  height: 46px;
 }
 .userText {
   margin-top: 10px;

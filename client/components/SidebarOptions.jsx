@@ -10,7 +10,6 @@ class SidebarOptions extends React.Component {
     };
   }
   mouseOver(type) {
-    console.log('mouseover');
     switch (type) {
       case 'Home':
         this.setState({ HomeImg: 'images/homeW.png' });
@@ -26,7 +25,6 @@ class SidebarOptions extends React.Component {
     }
   }
   mouseLeave(type) {
-    console.log('mouseleave');
     switch (type) {
       case 'Home':
         this.setState({ HomeImg: 'images/home.png' });

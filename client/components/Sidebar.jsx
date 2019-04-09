@@ -10,9 +10,9 @@ class Sidebar extends React.Component {
       InstallIcon: 'images/install.png',
     };
     this.recents = [
-      { name: 'Saw Theme', type: 'Playlist' },
-      { name: 'Some Music', type: 'Album' },
-      { name: 'Nekrogoblikon', type: 'Artist' },
+      { name: 'Saw Theme', type: 'playlist' },
+      { name: 'Some Music', type: 'album' },
+      { name: 'Nekrogoblikon', type: 'artist' },
     ];
   }
   mouseOver() {

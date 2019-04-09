@@ -33,6 +33,20 @@ class Menu extends React.Component {
           </div>
         </div>
       );
+    } else if (this.props.clicked === 'playlist') {
+      this.albumClick = (
+        <div style={this.style} className="menu-list" data-test="menuContainer">
+          <div className="menu-item" data-test="startRadio">
+            Start Radio
+          </div>
+          <div className="menu-item" data-test="saveLib">
+            Remove from Your Library
+          </div>
+          <div className="menu-item" data-test="copyLink">
+            Copy Playlist Link
+          </div>
+        </div>
+      );
     } else {
       this.albumClick = (
         <div style={this.style} className="menu-list" data-test="menuContainer">
