@@ -16,12 +16,12 @@ const setup = () => {
 };
 describe('Sidebar Tests: ', () => {
   let component;
-  rightClick(component,wrapper){
+  var rightClick = (component, wrapper) => {
     wrapper.simulate('contextmenu', {
-      preventDefault: () =>{},
-    }
+      preventDefault: () => {},
+    });
     component.update();
-  }
+  };
   beforeEach(() => {
     component = setup();
   });
@@ -61,22 +61,22 @@ describe('Sidebar Tests: ', () => {
     it('does Playlist render rightclick menu ', () => {
       expect.assertions(1);
       const wrapper = findByAttr(component, 'Recent Playlist');
-      rightClick(component,wrapper);
-      const menuWrapper = findByAttr(component, 'Playlist menu')
+      rightClick(component, wrapper);
+      const menuWrapper = findByAttr(component, 'Playlist menu');
       expect(menuWrapper.length).toBe(1);
     });
     it('does Artist render rightclick menu ', () => {
       expect.assertions(1);
       const wrapper = findByAttr(component, 'Recent Artist');
-      rightClick(component,wrapper);
-      const menuWrapper = findByAttr(component, 'Artist menu')
+      rightClick(component, wrapper);
+      const menuWrapper = findByAttr(component, 'Artist menu');
       expect(menuWrapper.length).toBe(1);
     });
     it('does Album render rightclick menu ', () => {
       expect.assertions(1);
       const wrapper = findByAttr(component, 'Recent Album');
-      rightClick(component,wrapper);
-      const menuWrapper = findByAttr(component, 'Album menu')
+      rightClick(component, wrapper);
+      const menuWrapper = findByAttr(component, 'Album menu');
       expect(menuWrapper.length).toBe(1);
     });
   });
@@ -84,12 +84,12 @@ describe('Sidebar Tests: ', () => {
     expect.assertions(1);
     const wrapper = findByAttr(component, 'Sidebar');
     expect(wrapper.length).toBe(1);
-  }); 
+  });
   it('does Sidebar header render ', () => {
     expect.assertions(1);
     const wrapper = findByAttr(component, 'SidebarHeader');
     expect(wrapper.length).toBe(1);
-  }); 
+  });
   it('does Install App render ', () => {
     expect.assertions(1);
     const wrapper = findByAttr(component, 'Install App');
