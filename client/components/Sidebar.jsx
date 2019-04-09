@@ -6,6 +6,20 @@ import './Album.scss';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      InstallIcon: 'images/install.png',
+    };
+    this.recents = [
+      { name: 'Saw Theme', type: 'Playlist' },
+      { name: 'Some Music', type: 'Album' },
+      { name: 'Nekrogoblikon', type: 'Artist' },
+    ];
+  }
+  mouseOver() {
+    this.setState({ InstallIcon: 'images/installW.png' });
+  }
+  mouseLeave() {
+    this.setState({ InstallIcon: 'images/install.png' });
   }
   render() {
     return (
@@ -16,11 +30,20 @@ class Sidebar extends React.Component {
         </h3>
         <SidebarOptions />
         <div className="RecentlyPlayed">Recently Played</div>
-        <SidebarRecents />
-        <div className="Install">
-          <span className="InstallText">Install App</span>
+        <SidebarRecents recents={this.recents} />
+        <div
+          className="Install"
+          data-test="Install App"
+          onMouseOver={this.mouseOver.bind(this)}
+          onMouseLeave={this.mouseLeave.bind(this)}
+        >
+          <img className="InstallIcon" alt="Install Icon" src={this.state.InstallIcon} />
+          <span className="InstallText imgText">Install App</span>
         </div>
-        <div className="User">User</div>
+        <div className="User" data-test="User">
+          <img className="User iconImg" alt="User Icon" src="images/user.png" />
+          <span className="userText imgText">User</span>
+        </div>
       </div>
     );
   }

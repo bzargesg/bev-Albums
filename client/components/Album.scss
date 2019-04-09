@@ -188,14 +188,27 @@ img {
   height: 40px;
   width: 40px;
 }
-.user {
+.User {
   text-align: left;
   height: 40px;
   margin-top: 20px;
+  padding-bottom: auto;
+  margin-top: 10;
+}
+.InstallText {
+  margin-left: 15px;
+}
+.userText {
+  margin-top: 10px;
+  margin-left: 15px;
 }
 .iconImg {
   height: 25px;
   width: 25px;
+}
+.InstallIcon {
+  height: 20px;
+  width: 20px;
 }
 .sidebaroptions:hover {
   color: white;
