@@ -156,7 +156,7 @@ img {
 .optionText {
   margin-left: 10px;
 }
-.logoTitle {
+.imgText {
   padding-bottom: auto;
   position: absolute;
   margin-left: 5px;
@@ -184,10 +184,18 @@ img {
   width: 206px;
   border-bottom: 1px solid #404040;
 }
+.logo {
+  height: 40px;
+  width: 40px;
+}
 .user {
   text-align: left;
   height: 40px;
   margin-top: 20px;
+}
+.iconImg {
+  height: 25px;
+  width: 25px;
 }
 .sidebaroptions:hover {
   color: white;

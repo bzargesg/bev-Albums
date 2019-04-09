@@ -11,8 +11,8 @@ class Sidebar extends React.Component {
     return (
       <div className="Sidebar" data-test="Sidebar">
         <h3 className="SidebarHeader" data-test="SidebarHeader">
-          <img className="Logo" alt="Spoopify Logo" src="images/spoop.png" />{' '}
-          <span className="logoTitle">Spoopify</span>
+          <img className="Logo" alt="Spoopify Logo" src="images/spotifly.png" />{' '}
+          <span className="logoTitle imgText">Spot-a-fly</span>
         </h3>
         <SidebarOptions />
         <div className="RecentlyPlayed">Recently Played</div>
