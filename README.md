@@ -3,8 +3,8 @@
 A React.js project mocking both the sidebar and album list component from spotify.
 
 ## Example combined with other microservices 
-[Spot-a-fly youtube](https://www.youtube.com/watch?v=dnSiX6tHUDo&feature=youtu.be)
-![]https://gph.is/g/4gDey6A
+[Spot-a-fly youtube](https://www.youtube.com/watch?v=dnSiX6tHUDo&feature=youtu.be)\
+[]https://gph.is/g/4gDey6A
 
 ## Getting Started
 
