@@ -4,7 +4,7 @@ A React.js project mocking both the sidebar and album list component from spotif
 
 ## Example combined with other microservices 
 [Spot-a-fly youtube](https://www.youtube.com/watch?v=dnSiX6tHUDo&feature=youtu.be)\
-![Application Homepage](https://gph.is/g/4gDey6A)
+![Application Homepage](https://media.giphy.com/media/Y1e9lvIChjr8YE6qYZ/giphy.gif)
 
 
 ## Getting Started
